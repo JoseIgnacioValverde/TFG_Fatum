@@ -146,6 +146,7 @@ MonoBehaviour:
   rb: {fileID: 3605382487843625043}
   speed: 6
   jumpForce: 5
+  _camera: {fileID: 0}
   checkDistance: 0.25
   GroundCheck: {fileID: 3605382488719581083}
   GroundMask:
@@ -153,7 +154,8 @@ MonoBehaviour:
     m_Bits: 64
   playerTransform: {fileID: 3605382487843625134}
   canJump: 0
-  canMove: 0
+  canMove: 1
+  onInventorySlate: 0
   tempLogic: {fileID: 0}
 --- !u!1 &3605382488394564160
 GameObject:

@@ -144,73 +144,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa432c894cd53e840869b666b7403ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerControls:
-    m_Name: Player Controls
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: b74a44f1-a6bf-428a-b342-542a7d93c7ba
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 83872149-7bf6-4c58-bb84-69ec09896be7
-      m_Path: <Keyboard>/i
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Controls
-      m_Flags: 0
-    - m_Name: 
-      m_Id: bf7fe888-5eab-4799-98f8-f98abd272b82
-      m_Path: <Keyboard>/space
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Controls
-      m_Flags: 0
-    - m_Name: WASD
-      m_Id: e203fa86-c09e-4b80-837a-3c437eaad270
-      m_Path: 2DVector
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Controls
-      m_Flags: 4
-    - m_Name: up
-      m_Id: c4d222bb-5bc6-49cb-a198-06bcfc882264
-      m_Path: <Keyboard>/w
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Controls
-      m_Flags: 8
-    - m_Name: down
-      m_Id: b895be43-ce41-4df2-bd5c-8de656d2ef0c
-      m_Path: <Keyboard>/s
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Controls
-      m_Flags: 8
-    - m_Name: left
-      m_Id: f8a9335a-6325-451e-b2c7-b8c8c64c4b29
-      m_Path: <Keyboard>/a
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Controls
-      m_Flags: 8
-    - m_Name: right
-      m_Id: 4a191014-6f9c-4204-ab90-f6388f8adee0
-      m_Path: <Keyboard>/d
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Controls
-      m_Flags: 8
   rb: {fileID: 3605382487843625043}
   speed: 6
   jumpForce: 5
+  _camera: {fileID: 0}
   checkDistance: 0.25
   GroundCheck: {fileID: 3605382488719581083}
   GroundMask:
@@ -218,7 +155,7 @@ MonoBehaviour:
     m_Bits: 64
   playerTransform: {fileID: 3605382487843625134}
   canJump: 0
-  canMove: 0
+  canMove: 1
   onInventorySlate: 0
   tempLogic: {fileID: 0}
 --- !u!1 &3605382488394564160
