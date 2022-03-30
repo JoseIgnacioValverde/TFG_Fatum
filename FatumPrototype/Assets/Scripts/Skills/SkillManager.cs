@@ -8,4 +8,16 @@ public class SkillManager : MonoBehaviour
     public void UseHermitSkill(){
         _skillsLogic.HermitSkill();
     }
+    public void UsePrimarySkill(string skillName){
+        switch (skillName){
+            case "Hermit":
+                UseHermitSkill();
+                break;
+            default:
+            break;
+        }
+    }
+    public void UseMoveSkill(string skillName){
+        
+    }
 }

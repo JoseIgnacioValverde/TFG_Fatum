@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         rb =GetComponent<Rigidbody>();
-            UnityEngine.Debug.Log("Movement = "+canMove);
+            //UnityEngine.Debug.Log("Movement = "+canMove);
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
             //Movement
@@ -71,13 +71,13 @@ public class PlayerController : MonoBehaviour
     }
     public void OnCollisionEnter(Collision collision){
         if(collision.gameObject.tag == "SaveSlot"){
-            UnityEngine.Debug.Log("Check");
+            //UnityEngine.Debug.Log("Check");
             onInventorySlate = true;
         }
         else{
             onInventorySlate = false;
         }
-        UnityEngine.Debug.Log("On Inventory Slate = "+onInventorySlate.ToString());
+        //UnityEngine.Debug.Log("On Inventory Slate = "+onInventorySlate.ToString());
     }
     public void DisableCamera(){
         if(canMove){

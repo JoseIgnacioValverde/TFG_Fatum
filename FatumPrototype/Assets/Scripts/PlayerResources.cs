@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class PlayerResources : MonoBehaviour
 {
     public float health, maxHealth = 100f;
@@ -12,12 +13,15 @@ public class PlayerResources : MonoBehaviour
     public Image manaBar;
     public Transform lookAt;
     public Transform itemGroup;
+    public Skill mainSkill;
+    public Skill[] passiveSkills;
 
     // Start is called before the first frame update
     void Start()
     {
         health = maxHealth;
         mana = maxMana;
+        passiveSkills = new Skill[3];
     }
 
     // Update is called once per frame
