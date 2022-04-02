@@ -20,4 +20,8 @@ public class SkillManager : MonoBehaviour
     public void UseMoveSkill(string skillName){
         
     }
+    public Skill GetSkill(string skillName){
+        Skill skill = SkillDB.GetSkillByName(skillName);
+        return skill;
+    }
 }

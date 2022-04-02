@@ -14,6 +14,8 @@ public class PlayerResources : MonoBehaviour
     public Transform lookAt;
     public Transform itemGroup;
     public Skill mainSkill;
+    public Skill mask;
+    public Skill movementSkill;
     public Skill[] passiveSkills;
 
     // Start is called before the first frame update
@@ -21,7 +23,7 @@ public class PlayerResources : MonoBehaviour
     {
         health = maxHealth;
         mana = maxMana;
-        passiveSkills = new Skill[3];
+        passiveSkills = new Skill[2];
     }
 
     // Update is called once per frame

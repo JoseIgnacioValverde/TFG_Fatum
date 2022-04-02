@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class InventoryManager : MonoBehaviour
 {
     public PlayerController controller;
     public Transform inventory;
-    private bool inventoryOpen, canMove;
-    public Transform itemSelectedTransform;
+    private bool inventoryOpen, canMove, movingPasive = false, movingMain = false,movingMask = false,movingMove = false;
+    public Transform itemSelectedTransform, pasiveSelected, mainMask, mainMov, lastItemSelected;
     public InventorySlot itemSelected;
+    public Skill skillSelected;
+    public SkillManager skillManager;
     private float delayOnOpen = 0.3f, delayOnMoving = 0.2f;
     private bool delayPassed = true, delayMovePassed = true;
     private float timeDelay1 = 0f, timeDelay2 = 0f;
@@ -17,6 +20,8 @@ public class InventoryManager : MonoBehaviour
     public Image [] skillImages;
     public Image [] passiveImages;
     public Image moveImage;
+    public InventorySlot hermit, hermit2, hermit3, hermit4, hermit5;
+    public TextMeshProUGUI descriptionText;
     // Start is called before the first frame update
     void Awake()
     {
@@ -101,30 +106,155 @@ public class InventoryManager : MonoBehaviour
                 MoveRight();
                 delayMovePassed = false;
             }
+            
+        }
+        if(inventoryOpen && delayMovePassed){
+            if(Input.GetButton("Jump")){
+                if(!itemSelected.equiped){
+                    //UnityEngine.Debug.Log("Type: "+skillSelected.Type.ToString());
+                    if(movingPasive||movingMain||movingMask||movingMove){
+                        ChangeEquipedSkill();
+                    }
+                    else{
+                        lastItemSelected =itemSelectedTransform;
+                        CheckAction(skillSelected.Type.ToString());
+                    }
+                    delayMovePassed = false;
+                }
+                
+                
+            }
+        }
+        if(movingPasive && delayMovePassed){
+            if(Input.GetKey(KeyCode.W)||Input.GetKey(KeyCode.A)){
+                MovePasiveLeft();
+                delayMovePassed = false;
+            }
+            if(Input.GetKey(KeyCode.S)||Input.GetKey(KeyCode.D)){
+                MovePasiveRight();
+                delayMovePassed = false;
+            }
         }
     }
+    #region BaseMovement
     public void MoveLeft(){
         itemSelected.active = false;
         itemSelectedTransform = itemSelected.itemLeft;
         itemSelected = itemSelectedTransform.GetComponent<InventorySlot>();
+        if(itemSelected.unlocked){
+            skillSelected = skillManager.GetSkill(itemSelected.skillName);
+        }
+        else{
+            skillSelected = skillManager.GetSkill("None");
+        }
+        descriptionText.text = skillSelected.Descritption;
+        UnityEngine.Debug.Log("Description: "+skillSelected.Descritption);
         itemSelected.active = true;
     }
     public void MoveRight(){
         itemSelected.active = false;
         itemSelectedTransform = itemSelected.itemRight;
         itemSelected = itemSelectedTransform.GetComponent<InventorySlot>();
+        if(itemSelected.unlocked){
+            skillSelected = skillManager.GetSkill(itemSelected.skillName);
+        }
+        else{
+            skillSelected = skillManager.GetSkill("None");
+        }
+        descriptionText.text = skillSelected.Descritption;
+        UnityEngine.Debug.Log("Description: "+skillSelected.Descritption);
         itemSelected.active = true;
     }
     public void MoveUp(){
         itemSelected.active = false;
         itemSelectedTransform = itemSelected.itemUp;
         itemSelected = itemSelectedTransform.GetComponent<InventorySlot>();
+        if(itemSelected.unlocked){
+            skillSelected = skillManager.GetSkill(itemSelected.skillName);
+        }
+        else{
+            skillSelected = skillManager.GetSkill("None");
+        }
+        descriptionText.text = skillSelected.Descritption;
+        UnityEngine.Debug.Log("Description: "+skillSelected.Descritption);
         itemSelected.active = true;
     }
     public void MoveDown(){
         itemSelected.active = false;
         itemSelectedTransform = itemSelected.itemDown;
         itemSelected = itemSelectedTransform.GetComponent<InventorySlot>();
+        if(itemSelected.unlocked){
+            skillSelected = skillManager.GetSkill(itemSelected.skillName);
+        }
+        else{
+            skillSelected = skillManager.GetSkill("None");
+        }
+        descriptionText.text = skillSelected.Descritption;
+        //UnityEngine.Debug.Log("Description: "+skillSelected.Descritption);
         itemSelected.active = true;
     }
+    #endregion
+    public void MovePasiveLeft(){
+        pasiveSelected.GetComponent<InventorySlot>().active = false;
+        itemSelectedTransform = pasiveSelected.GetComponent<InventorySlot>().itemLeft;
+        pasiveSelected = pasiveSelected.GetComponent<InventorySlot>().itemLeft;
+        pasiveSelected.GetComponent<InventorySlot>().active = true;
+    }
+    public void MovePasiveRight(){
+        pasiveSelected.GetComponent<InventorySlot>().active = false;
+        itemSelectedTransform = pasiveSelected.GetComponent<InventorySlot>().itemRight;
+        pasiveSelected = pasiveSelected.GetComponent<InventorySlot>().itemRight;
+        pasiveSelected.GetComponent<InventorySlot>().active = true;
+    }
+    public void CheckAction(string itemType){
+        if(canMove){
+            switch(itemType){
+            case "Mask":
+                itemSelectedTransform = mainMask;
+                itemSelectedTransform.GetComponent<InventorySlot>().active = true;
+                canMove = false;
+                movingMask = true;
+            break;
+            case"Pasive":
+                itemSelectedTransform = pasiveSelected;
+                itemSelectedTransform.GetComponent<InventorySlot>().active = true;
+                canMove = false;
+                movingPasive = true;
+            break;
+            case"Movement":
+                itemSelectedTransform = mainMov;
+                itemSelectedTransform.GetComponent<InventorySlot>().active = true;
+                canMove = false;
+            break;
+            case"Main":
+            break;
+            default:
+            break;
+            }
+        }
+        else{
+            ReturnToInventory();
+        }
+        
+    }
+    public void ReturnToInventory(){
+        UnityEngine.Debug.Log("I'm at returnToInventory");
+        movingPasive = false; movingMain = false; movingMask = false; movingMove = false;
+        itemSelectedTransform.GetComponent<InventorySlot>().active = false;
+        itemSelectedTransform = itemSelected.self;
+        canMove = true;
+    }
+    public void ChangeEquipedSkill(){
+        itemSelectedTransform.GetComponent<InventorySlot>().skillName = itemSelected.skillName;
+        //itemSelectedTransform.GetComponent<InventorySlot>().equiped = false;
+        itemSelectedTransform.GetComponent<Image>().sprite = lastItemSelected.GetComponent<Image>().sprite;
+        itemSelected.equiped = true;
+        ReturnToInventory();
+        
+
+    }
+    public void SwitchMainAction(){
+
+    }
+
 }

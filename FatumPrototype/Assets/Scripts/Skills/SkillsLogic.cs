@@ -41,6 +41,9 @@ public class SkillsLogic : MonoBehaviour
             
         }
     }
+    public void UseLoversSkill(){
+        
+    }
     public void Update(){
         if(timerOn){
             InnerCooldown+= Time.deltaTime;

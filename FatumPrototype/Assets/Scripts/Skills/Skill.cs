@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Skill
 {
     public enum SkillType{
-        Main, Pasive, Movement, None
+        Main, Pasive, Movement, None, Mask
     }
     public string Name;
     public string SkillAction;
