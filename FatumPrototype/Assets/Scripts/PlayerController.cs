@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     public bool canMove =true, saved = false;
     public bool onInventorySlate;
     public SkillsLogic tempLogic;
-    public SaveDataManager dataManager;
+    public GameManager dataManager;
 
     // Start is called before the first frame update
     void Awake(){
@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
             //UnityEngine.Debug.Log("Check");
             onInventorySlate = true;
             if(!saved){
-                dataManager.SaveData();
+                dataManager.SaveGameData();
                 saved = true;
             }
         }

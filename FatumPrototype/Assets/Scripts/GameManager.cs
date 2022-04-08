@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public InventoryManager _manager;
+    public PlayerResources _resources;
+    public string currentMap;
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -14,5 +16,11 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+    public void SaveGameData(){
+        SaveDataManager.SaveData(currentMap, _resources.health.ToString(), _resources.mana.ToString(), 
+        _resources.self.position.x,_resources.self.position.y,_resources.self.position.z, _manager.allSlots, 
+        _manager.mainSkill1.skillName, _manager.mainSkill2.skillName, _manager.mainSkill3.skillName, _manager.mainSkill4.skillName, _manager.mainSkill5.skillName, 
+        _manager.pasiveSkill1.skillName, _manager.pasiveSkill2.skillName, _manager.maskSkill.skillName, _manager.movSkill.skillName);
     }
 }

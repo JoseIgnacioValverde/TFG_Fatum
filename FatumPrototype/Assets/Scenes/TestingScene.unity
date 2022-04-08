@@ -2253,6 +2253,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1581316cdd68917489e3e16d41b04158, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _manager: {fileID: 1480928616}
+  _resources: {fileID: 834754638}
+  currentMap: TestingScene
 --- !u!114 &1480928619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3104,7 +3107,7 @@ PrefabInstance:
     - target: {fileID: 3605382487843625044, guid: e6e2009bfc8646742ae24befeab5d29e, type: 3}
       propertyPath: dataManager
       value: 
-      objectReference: {fileID: 1480928619}
+      objectReference: {fileID: 1480928618}
     - target: {fileID: 3605382487843625133, guid: e6e2009bfc8646742ae24befeab5d29e, type: 3}
       propertyPath: m_Name
       value: Player

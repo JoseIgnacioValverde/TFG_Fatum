@@ -35,7 +35,9 @@ public class InventoryManager : MonoBehaviour
         itemSelectedTransform = inventory.transform.GetChild(2).transform.GetChild(0);
         itemSelected = itemSelectedTransform.GetComponent<InventorySlot>();
         itemSelected.active = true;
-        UnityEngine.Debug.Log(inventory.transform.GetChild(2).transform.GetChild(0));
+        skillSelected = skillManager.GetSkill(itemSelected.skillName);
+        descriptionText.text = skillSelected.Descritption;
+        //UnityEngine.Debug.Log(inventory.transform.GetChild(2).transform.GetChild(0));
     }
 
     // Update is called once per frame
@@ -53,6 +55,7 @@ public class InventoryManager : MonoBehaviour
                         delayPassed = false;
                         controller.canMove = true;
                         canMove = false;
+                        controller.dataManager.SaveGameData();
                         //Time.timeScale = 1f;
                     }
                     else{

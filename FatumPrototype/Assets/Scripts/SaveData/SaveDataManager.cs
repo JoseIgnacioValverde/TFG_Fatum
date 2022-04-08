@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-using System.Text.RegularExpressions;
+
 
 public class SaveDataManager : MonoBehaviour
 {
@@ -16,7 +16,7 @@ public class SaveDataManager : MonoBehaviour
     public Vector3 spawnPosition;
     void Start(){
         path = Application.persistentDataPath;
-        fileName = "/mainSaveFile.txt";
+        fileName = "/GameDataSave.txt";
         fullPath = path + fileName;
         confirmPath = fullPath;
     }
@@ -28,28 +28,39 @@ public class SaveDataManager : MonoBehaviour
     {
         File.Delete(fullPath);
     }
-    public void SaveData(){
+    public static void SaveData(string currentMap, string health, string mana, float posX, float posY, float posZ, List<InventorySlot> allSlots, string mainSkill1, string mainSkill2,
+    string mainSkill3, string mainSkill4, string mainSkill5, string pasiveSkill1, string pasiveSkill2, string mask, string movement){
         UnityEngine.Debug.Log("Saving Game");
         File.WriteAllText(fullPath, string.Empty);
         StreamWriter writer = new StreamWriter(fullPath, false);
 
         string currentLevel = "CurrentLevel:" + currentMap;
-        string playerHealth = "PlayerHealth:"+ _resources.health;
-        string playerMana = "PlayerMana:"+ _resources.mana;
-        string Coords = "Coords:"+_resources.self.position.x+","+_resources.self.position.y+","+_resources.self.position.z;
+        string playerHealth = "PlayerHealth:"+ health;
+        string playerMana = "PlayerMana:"+ mana;
+        string Coords = "Coords:"+posX+","+posY+","+posZ;
         string itemsState = "Items:";
-        string mainSkills = "MainSkillEquiped:"+_manager.mainSkill1.skillName+","+_manager.mainSkill2.skillName+","+_manager.mainSkill3.skillName+","+_manager.mainSkill4.skillName
-        +","+_manager.mainSkill5.skillName;
-        string pasiveSkillsEquiped = "PasiveSkillsEquiped:"+_manager.pasiveSkill1.skillName+","+_manager.pasiveSkill2.skillName;
-        string maskEquiped = "MaskEquiped:"+_manager.maskSkill.skillName;
-        string movEquiped = "MovementEquiped:"+_manager.movSkill.skillName;
+        string mainSkills = "MainSkillEquiped:"+mainSkill1+","+mainSkill2+","+mainSkill3+","+mainSkill4
+        +","+mainSkill5;
+        string pasiveSkillsEquiped = "PasiveSkillsEquiped:"+pasiveSkill1+","+pasiveSkill2;
+        string maskEquiped = "MaskEquiped:"+mask;
+        string movEquiped = "MovementEquiped:"+movement;
         
-        List<InventorySlot> tempSlot = _manager.allSlots;
+        List<InventorySlot> tempSlot = allSlots;
         for(int i = 0; i< tempSlot.Count; i++){
             itemsState += tempSlot[i].skillName + "," + tempSlot[i].unlocked +",";
         }
         if(itemsState[itemsState.Length-1].ToString().Equals(","))
             itemsState = itemsState.Substring(0, itemsState.Length - 1);
+        
+        UnityEngine.Debug.Log(currentLevel);
+        UnityEngine.Debug.Log(playerHealth);
+        UnityEngine.Debug.Log(playerMana);
+        UnityEngine.Debug.Log(Coords);
+        UnityEngine.Debug.Log(itemsState);
+        UnityEngine.Debug.Log(mainSkills);
+        UnityEngine.Debug.Log(pasiveSkillsEquiped);
+        UnityEngine.Debug.Log(maskEquiped);
+        UnityEngine.Debug.Log(movEquiped);
 
         writer.WriteLine(currentLevel);
         writer.WriteLine(playerHealth);
@@ -60,6 +71,8 @@ public class SaveDataManager : MonoBehaviour
         writer.WriteLine(pasiveSkillsEquiped);
         writer.WriteLine(maskEquiped);
         writer.WriteLine(movEquiped);
+
+        writer.Close();
     }
 
     // Update is called once per frame
@@ -116,6 +129,7 @@ public class SaveDataManager : MonoBehaviour
                 _movement = word[1];
             }
         }
+        file.Close();
         _manager.maskSkill.skillName = _mask;
         _manager.movSkill.skillName = _movement;
         _manager.mainSkill1.skillName =_mainSkill1;
