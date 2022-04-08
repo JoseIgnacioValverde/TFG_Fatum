@@ -12,7 +12,7 @@ public class PlayerResources : MonoBehaviour
     public Image healthBar;
     public Image manaBar;
     public Transform lookAt;
-    public Transform itemGroup;
+    public Transform self;
     public Skill mainSkill;
     public Skill mask;
     public Skill movementSkill;
@@ -57,11 +57,7 @@ public class PlayerResources : MonoBehaviour
             mana -= quantity;
         }
     }
-    public void FaceCamera(){
-        if(lookAt){
-            itemGroup.LookAt(2* itemGroup.position -lookAt.position);
-        }
-    }
+    
     
     
 }

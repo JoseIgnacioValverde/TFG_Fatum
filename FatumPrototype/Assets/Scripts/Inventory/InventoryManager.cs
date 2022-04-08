@@ -9,18 +9,16 @@ public class InventoryManager : MonoBehaviour
     public PlayerController controller;
     public Transform inventory;
     private bool inventoryOpen, canMove, movingPasive = false, movingMain = false,movingMask = false,movingMove = false;
-    public Transform itemSelectedTransform, pasiveSelected, mainMask, mainMov, lastItemSelected;
+    public Transform itemSelectedTransform, pasiveSelected, mainMask, mainMov, lastItemSelected, inventorySelector;
     public InventorySlot itemSelected;
     public Skill skillSelected;
     public SkillManager skillManager;
     private float delayOnOpen = 0.3f, delayOnMoving = 0.2f;
     private bool delayPassed = true, delayMovePassed = true;
     private float timeDelay1 = 0f, timeDelay2 = 0f;
-    public Image maskImage;
-    public Image [] skillImages;
-    public Image [] passiveImages;
+    public List<InventorySlot> allSlots = new List<InventorySlot>();
     public Image moveImage;
-    public InventorySlot hermit, hermit2, hermit3, hermit4, hermit5;
+    public InventorySlot mainSkill1, mainSkill2, mainSkill3, mainSkill4, mainSkill5, pasiveSkill1, pasiveSkill2, movSkill, maskSkill;
     public TextMeshProUGUI descriptionText;
     // Start is called before the first frame update
     void Awake()
@@ -30,6 +28,7 @@ public class InventoryManager : MonoBehaviour
         inventory.gameObject.SetActive(false);
         inventoryOpen = false;
         delayPassed = true;
+        GetAllInventorySlots();
         //
     }
     void Start(){
@@ -225,6 +224,7 @@ public class InventoryManager : MonoBehaviour
                 itemSelectedTransform = mainMov;
                 itemSelectedTransform.GetComponent<InventorySlot>().active = true;
                 canMove = false;
+                movingMove = true;
             break;
             case"Main":
             break;
@@ -245,6 +245,7 @@ public class InventoryManager : MonoBehaviour
         canMove = true;
     }
     public void ChangeEquipedSkill(){
+        DisableEquiped(itemSelectedTransform.GetComponent<InventorySlot>().skillName);
         itemSelectedTransform.GetComponent<InventorySlot>().skillName = itemSelected.skillName;
         //itemSelectedTransform.GetComponent<InventorySlot>().equiped = false;
         itemSelectedTransform.GetComponent<Image>().sprite = lastItemSelected.GetComponent<Image>().sprite;
@@ -255,6 +256,24 @@ public class InventoryManager : MonoBehaviour
     }
     public void SwitchMainAction(){
 
+    }
+    public void DisableEquiped(string itemName){
+        int index = inventorySelector.transform.childCount;
+        for(int i = 0; i< index; i++){
+            InventorySlot invToCheck = inventorySelector.GetChild(i).GetComponent<InventorySlot>();
+            if(invToCheck.skillName == itemName){
+                invToCheck.equiped = false;
+            }
+        }
+    }
+    public void GetAllInventorySlots(){
+        int index = inventorySelector.transform.childCount;
+        List<InventorySlot> invList = new List<InventorySlot>();
+        for(int i = 0; i< index; i++){
+            InventorySlot actualInv = inventorySelector.GetChild(i).GetComponent<InventorySlot>();
+            invList.Add(actualInv);
+        }
+        allSlots = invList;
     }
 
 }

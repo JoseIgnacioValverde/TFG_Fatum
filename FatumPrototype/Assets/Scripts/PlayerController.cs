@@ -17,9 +17,10 @@ public class PlayerController : MonoBehaviour
     public LayerMask GroundMask;
     public Transform playerTransform;
     public bool canJump;
-    public bool canMove =true;
+    public bool canMove =true, saved = false;
     public bool onInventorySlate;
     public SkillsLogic tempLogic;
+    public SaveDataManager dataManager;
 
     // Start is called before the first frame update
     void Awake(){
@@ -76,9 +77,14 @@ public class PlayerController : MonoBehaviour
         if(collision.gameObject.tag == "SaveSlot"){
             //UnityEngine.Debug.Log("Check");
             onInventorySlate = true;
+            if(!saved){
+                dataManager.SaveData();
+                saved = true;
+            }
         }
         else{
             onInventorySlate = false;
+            saved = false;
         }
         //UnityEngine.Debug.Log("On Inventory Slate = "+onInventorySlate.ToString());
     }

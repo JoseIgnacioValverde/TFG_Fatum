@@ -2320,7 +2320,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7510724954703321356}
   m_Layer: 5
-  m_Name: ItemsUnlocked
+  m_Name: ItemSelector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2796,7 +2796,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Priestess
-  unlocked: 0
+  unlocked: 1
   active: 0
   equiped: 0
   self: {fileID: 7510724954863630235}
@@ -3528,7 +3528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Chariot
-  unlocked: 0
+  unlocked: 1
   active: 0
   equiped: 0
   self: {fileID: 7510724955169182739}
@@ -5850,7 +5850,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Lovers
-  unlocked: 0
+  unlocked: 1
   active: 0
   equiped: 0
   self: {fileID: 7510724956060518361}
@@ -5994,7 +5994,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Strenght
-  unlocked: 0
+  unlocked: 1
   active: 0
   equiped: 0
   self: {fileID: 7510724956162178712}
@@ -6282,7 +6282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Hierophant
-  unlocked: 0
+  unlocked: 1
   active: 0
   equiped: 0
   self: {fileID: 7510724956390333570}
@@ -6714,7 +6714,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Emperor
-  unlocked: 0
+  unlocked: 1
   active: 0
   equiped: 0
   self: {fileID: 7510724956420366146}
@@ -7365,7 +7365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Magician
-  unlocked: 0
+  unlocked: 1
   active: 0
   equiped: 0
   self: {fileID: 7510724956556472936}

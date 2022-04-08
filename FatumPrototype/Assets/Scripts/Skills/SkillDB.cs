@@ -28,35 +28,35 @@ public static class SkillDB
         "Empress",
         "None", 0, 0, 0,
         Skill.SkillType.Main, "null",
-        "Not unlocked yet"
+        "The Empress"
 
     );
     public static Skill Devil = new Skill(
         "Devil",
         "None", 0, 0, 0,
         Skill.SkillType.Main, "null",
-        "Not unlocked yet"
+        "The Devil"
 
     );
     public static Skill Moon = new Skill(
         "Moon",
         "None", 0, 0, 0,
         Skill.SkillType.Main, "null",
-        "Not unlocked yet"
+        "The Moon"
 
     );
     public static Skill Sun = new Skill(
         "Sun",
         "None", 0, 0, 0,
         Skill.SkillType.Main, "null",
-        "Not unlocked yet"
+        "The Sun"
 
     );
     public static Skill Judgement = new Skill(
         "Judgement",
         "None", 0, 0, 0,
         Skill.SkillType.Main, "null",
-        "Not unlocked yet"
+        "Judgement"
 
     );
 #endregion
@@ -65,21 +65,21 @@ public static class SkillDB
         "Lovers",
         "None", 0, 0, 0,
         Skill.SkillType.Pasive, "null",
-        "Not unlocked yet"
+        "The Lovers"
 
     );
     public static Skill Hierophant = new Skill(
         "Hierophant",
         "None", 0, 0, 0,
         Skill.SkillType.Pasive, "null",
-        "Not unlocked yet"
+        "The Hierophant"
 
     );
     public static Skill Strenght = new Skill(
         "Strenght",
         "None", 0, 0, 0,
         Skill.SkillType.Pasive, "null",
-        "Not unlocked yet"
+        "Strenght"
 
     );
     public static Skill Wheel = new Skill(
@@ -93,21 +93,21 @@ public static class SkillDB
         "Temperance",
         "None", 0, 0, 0,
         Skill.SkillType.Pasive, "null",
-        "Not unlocked yet"
+        "Temperance"
 
     );
     public static Skill Tower = new Skill(
         "Tower",
         "None", 0, 0, 0,
         Skill.SkillType.Pasive, "null",
-        "Not unlocked yet"
+        "The Tower"
 
     );
     public static Skill Hanged = new Skill(
         "Hanged",
         "None", 0, 0, 0,
         Skill.SkillType.Pasive, "null",
-        "Not unlocked yet"
+        "The Hanged Man"
 
     );
 #endregion
@@ -116,14 +116,14 @@ public static Skill Magician = new Skill(
         "Magician",
         "None", 0, 0, 0,
         Skill.SkillType.Movement, "null",
-        "Not unlocked yet"
+        "The Magician"
 
     );
     public static Skill Chariot = new Skill(
         "Chariot",
         "None", 0, 0, 0,
         Skill.SkillType.Movement, "null",
-        "Not unlocked yet"
+        "The Chariot"
 
     );
     
@@ -139,37 +139,37 @@ public static Skill Fool = new Skill(
         "Priestess",
         "None", 0, 0, 0,
         Skill.SkillType.Mask, "null",
-        "Not unlocked yet"
+        "The High Priestess"
 
     );public static Skill Emperor = new Skill(
         "Emperor",
         "None", 0, 0, 0,
         Skill.SkillType.Mask, "null",
-        "Not unlocked yet"
+        "The Emperor"
 
     );public static Skill Justice = new Skill(
         "Justice",
         "None", 0, 0, 0,
         Skill.SkillType.Mask, "null",
-        "Not unlocked yet"
+        "Justice"
 
     );public static Skill Death = new Skill(
         "Death",
         "None", 0, 0, 0,
         Skill.SkillType.Mask, "null",
-        "Not unlocked yet"
+        "Death doesn't make distinctions between the wealthy and the poor"
     );
     public static Skill Star = new Skill(
         "Star",
         "None", 0, 0, 0,
         Skill.SkillType.Mask, "null",
-        "Not unlocked yet"
+        "The Star"
     );
     public static Skill World = new Skill(
         "World",
         "None", 0, 0, 0,
         Skill.SkillType.Mask, "null",
-        "Not unlocked yet"
+        "ZA WARUDO"
     );
 #endregion
     
@@ -184,6 +184,63 @@ public static Skill GetSkillByName(string s){
             break;
         case "Wheel":
             get = Wheel;
+            break;
+        case "Magician":
+            get = Magician;
+            break;
+        case "Priestess":
+            get = Priestess;
+            break;
+        case "Hierophant":
+            get = Hierophant;
+            break;
+        case "Sun":
+            get = Sun;
+            break;
+        case "Moon":
+            get = Moon;
+            break;
+        case "Star":
+            get = Star;
+            break;
+        case "World":
+            get = World;
+            break;
+        case "Strenght":
+            get = Strenght;
+            break;
+        case "Temperance":
+            get = Temperance;
+            break;
+        case "Justice":
+            get = Justice;
+            break;
+        case "Judgement":
+            get = Judgement;
+            break;
+        case "Empress":
+            get = Empress;
+            break;
+        case "Emperor":
+            get = Emperor;
+            break;
+        case "Death":
+            get = Death;
+            break;
+        case "Devil":
+            get = Devil;
+            break;
+        case "Hanged":
+            get = Hanged;
+            break;
+        case "Tower":
+            get = Tower;
+            break;
+        case "Chariot":
+            get = Chariot;
+            break;
+        case "Lovers":
+            get = Lovers;
             break;
         default:
             get = NoSkill;
