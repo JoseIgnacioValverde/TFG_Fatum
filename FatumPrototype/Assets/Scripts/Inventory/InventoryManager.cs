@@ -8,7 +8,7 @@ public class InventoryManager : MonoBehaviour
 {
     public PlayerController controller;
     public Transform inventory;
-    private bool inventoryOpen, canMove, movingPasive = false, movingMain = false,movingMask = false,movingMove = false;
+    private bool inventoryOpen, canMove, movingPasive = false, movingMain = false,movingMask = false,movingMove = false, description = false;
     public Transform itemSelectedTransform, pasiveSelected, mainMask, mainMov, lastItemSelected, inventorySelector;
     public InventorySlot itemSelected;
     public Skill skillSelected;
@@ -17,18 +17,20 @@ public class InventoryManager : MonoBehaviour
     private bool delayPassed = true, delayMovePassed = true;
     private float timeDelay1 = 0f, timeDelay2 = 0f;
     public List<InventorySlot> allSlots = new List<InventorySlot>();
-    public Image moveImage;
+    public List<string> allNames = new List<string>();
+    public Image moveImage, maskImage, pasive1Image, pasive2Image;
     public InventorySlot mainSkill1, mainSkill2, mainSkill3, mainSkill4, mainSkill5, pasiveSkill1, pasiveSkill2, movSkill, maskSkill;
     public TextMeshProUGUI descriptionText;
     // Start is called before the first frame update
     void Awake()
     {
         //controller = transform.Find("Player").GetComponent<PlayerController>();
-        UnityEngine.Debug.Log(controller);
+        //UnityEngine.Debug.Log(controller);
         inventory.gameObject.SetActive(false);
         inventoryOpen = false;
         delayPassed = true;
         GetAllInventorySlots();
+        SetAllImages();
         //
     }
     void Start(){
@@ -36,7 +38,7 @@ public class InventoryManager : MonoBehaviour
         itemSelected = itemSelectedTransform.GetComponent<InventorySlot>();
         itemSelected.active = true;
         skillSelected = skillManager.GetSkill(itemSelected.skillName);
-        descriptionText.text = skillSelected.Descritption;
+        
         //UnityEngine.Debug.Log(inventory.transform.GetChild(2).transform.GetChild(0));
     }
 
@@ -122,9 +124,10 @@ public class InventoryManager : MonoBehaviour
                         CheckAction(skillSelected.Type.ToString());
                     }
                     delayMovePassed = false;
-                }
-                
-                
+                } 
+            }
+            if(Input.GetButton("ChangeDescription")){
+                ChangeDescription(true);
             }
         }
         if(movingPasive && delayMovePassed){
@@ -138,6 +141,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
+    #region InventoryActions
     #region BaseMovement
     public void MoveLeft(){
         itemSelected.active = false;
@@ -149,7 +153,9 @@ public class InventoryManager : MonoBehaviour
         else{
             skillSelected = skillManager.GetSkill("None");
         }
-        descriptionText.text = skillSelected.Descritption;
+        
+       ChangeDescription(false);
+        
         UnityEngine.Debug.Log("Description: "+skillSelected.Descritption);
         itemSelected.active = true;
     }
@@ -163,7 +169,9 @@ public class InventoryManager : MonoBehaviour
         else{
             skillSelected = skillManager.GetSkill("None");
         }
-        descriptionText.text = skillSelected.Descritption;
+
+        
+        ChangeDescription(false);
         UnityEngine.Debug.Log("Description: "+skillSelected.Descritption);
         itemSelected.active = true;
     }
@@ -177,7 +185,7 @@ public class InventoryManager : MonoBehaviour
         else{
             skillSelected = skillManager.GetSkill("None");
         }
-        descriptionText.text = skillSelected.Descritption;
+        ChangeDescription(false);
         UnityEngine.Debug.Log("Description: "+skillSelected.Descritption);
         itemSelected.active = true;
     }
@@ -191,7 +199,7 @@ public class InventoryManager : MonoBehaviour
         else{
             skillSelected = skillManager.GetSkill("None");
         }
-        descriptionText.text = skillSelected.Descritption;
+        ChangeDescription(false);
         //UnityEngine.Debug.Log("Description: "+skillSelected.Descritption);
         itemSelected.active = true;
     }
@@ -247,6 +255,25 @@ public class InventoryManager : MonoBehaviour
         itemSelectedTransform = itemSelected.self;
         canMove = true;
     }
+    public void ChangeDescription(bool changeState){
+        if(changeState)
+            if(description)
+                description = false;
+            else
+                description = true;
+        
+        string[] descript = skillSelected.Descritption.Split(':');
+        if(description){
+            descriptionText.text = descript[1];
+            
+        }  
+        else{
+            descriptionText.text = descript[0];
+            
+        }
+        delayMovePassed = false;  
+    }
+    #endregion
     public void ChangeEquipedSkill(){
         DisableEquiped(itemSelectedTransform.GetComponent<InventorySlot>().skillName);
         itemSelectedTransform.GetComponent<InventorySlot>().skillName = itemSelected.skillName;
@@ -275,8 +302,21 @@ public class InventoryManager : MonoBehaviour
         for(int i = 0; i< index; i++){
             InventorySlot actualInv = inventorySelector.GetChild(i).GetComponent<InventorySlot>();
             invList.Add(actualInv);
+            allNames.Add(actualInv.skillName);
         }
         allSlots = invList;
     }
-
+    public void SetAllImages(){
+        //UnityEngine.Debug.Log(pasiveSkill1.GetComponentInParent<Image>() != null);
+        Skill auxiliar = SkillDB.GetSkillByName(pasiveSkill1.skillName);
+        pasive1Image.sprite = auxiliar.skillSprite;
+        auxiliar = SkillDB.GetSkillByName(pasiveSkill2.skillName);
+        pasive2Image.sprite = auxiliar.skillSprite;
+        auxiliar = SkillDB.GetSkillByName(maskSkill.skillName);
+        maskImage.sprite = auxiliar.skillSprite;
+        auxiliar = SkillDB.GetSkillByName(movSkill.skillName);
+        moveImage.sprite = auxiliar.skillSprite;
+        //pasiveSkill1.GetComponentInParent<Image>().sprite = auxiliar.skillSprite;
+        //InventorySlot auxiliar2 = allSlots.Find("Hermit");
+    }
 }

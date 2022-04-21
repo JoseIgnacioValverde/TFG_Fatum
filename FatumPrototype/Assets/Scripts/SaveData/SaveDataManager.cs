@@ -14,7 +14,7 @@ public class SaveDataManager : MonoBehaviour
     public PlayerResources _resources;
     public string currentMap;
     public Vector3 spawnPosition;
-    void Start(){
+    void Awake(){
         path = Application.persistentDataPath;
         fileName = "/GameDataSave.txt";
         fullPath = path + fileName;
@@ -52,7 +52,7 @@ public class SaveDataManager : MonoBehaviour
         if(itemsState[itemsState.Length-1].ToString().Equals(","))
             itemsState = itemsState.Substring(0, itemsState.Length - 1);
         
-        UnityEngine.Debug.Log(currentLevel);
+        /*UnityEngine.Debug.Log(currentLevel);
         UnityEngine.Debug.Log(playerHealth);
         UnityEngine.Debug.Log(playerMana);
         UnityEngine.Debug.Log(Coords);
@@ -60,7 +60,7 @@ public class SaveDataManager : MonoBehaviour
         UnityEngine.Debug.Log(mainSkills);
         UnityEngine.Debug.Log(pasiveSkillsEquiped);
         UnityEngine.Debug.Log(maskEquiped);
-        UnityEngine.Debug.Log(movEquiped);
+        UnityEngine.Debug.Log(movEquiped);*/
 
         writer.WriteLine(currentLevel);
         writer.WriteLine(playerHealth);
@@ -132,6 +132,9 @@ public class SaveDataManager : MonoBehaviour
         file.Close();
         _manager.maskSkill.skillName = _mask;
         _manager.movSkill.skillName = _movement;
+        _manager.pasiveSkill1.skillName = _passiveSkill1;
+        _manager.pasiveSkill2.skillName = _passiveSkill2;
+
         _manager.mainSkill1.skillName =_mainSkill1;
         _manager.mainSkill2.skillName=_mainSkill2;
         _manager.mainSkill3.skillName=_mainSkill3;

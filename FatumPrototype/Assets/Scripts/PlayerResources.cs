@@ -32,7 +32,8 @@ public class PlayerResources : MonoBehaviour
         if(health > maxHealth) health = maxHealth;
         if(mana > maxMana) mana = maxMana;
         lerpSpeed = 3f* Time.deltaTime;
-        BarFillers();
+        //BarFillers();
+        ColorChanger();
     }
     void FixedUpdate(){
         //FaceCamera();
@@ -48,7 +49,8 @@ public class PlayerResources : MonoBehaviour
         manaBar.color = manaColor;
     }
     public void TakeDamage(float quantity){
-        if(health>0&& health < maxHealth){
+        UnityEngine.Debug.Log("Damage!" + quantity);
+        if(health > 0&& health <= maxHealth){
             health -= quantity;
         }
     }

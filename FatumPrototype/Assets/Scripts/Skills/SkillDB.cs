@@ -13,7 +13,7 @@ public static class SkillDB
         "NoSkill",
         "None", 0, 0, 0,
         Skill.SkillType.None, "noItem",
-        "Not unlocked yet"
+        "Not unlocked yet:Not unlocked yet"
 
     );
 #region MainSkills
@@ -21,42 +21,42 @@ public static class SkillDB
         "Hermit",
         "UseHermitSkill", 0, 0, 0,
         Skill.SkillType.Main, "the hermit",
-        "The Hermit walks through every plane, wandering, but never lost on it's way."
+        "The Hermit walks through every plane, wandering, but never lost on it's way:Press left click to leave your body and wander on the spiritual plane. Beware, your body can still be damaged."
 
     );
     public static Skill Empress = new Skill(
         "Empress",
         "None", 0, 0, 0,
-        Skill.SkillType.Main, "null",
-        "The Empress"
+        Skill.SkillType.Main, "the empress",
+        "The Empress:Empress descript"
 
     );
     public static Skill Devil = new Skill(
         "Devil",
         "None", 0, 0, 0,
-        Skill.SkillType.Main, "null",
-        "The Devil"
+        Skill.SkillType.Main, "the devil",
+        "The Devil:Devil descript"
 
     );
     public static Skill Moon = new Skill(
         "Moon",
         "None", 0, 0, 0,
-        Skill.SkillType.Main, "null",
-        "The Moon"
+        Skill.SkillType.Main, "the moon",
+        "The Moon:Moon descript"
 
     );
     public static Skill Sun = new Skill(
         "Sun",
         "None", 0, 0, 0,
-        Skill.SkillType.Main, "null",
-        "The Sun"
+        Skill.SkillType.Main, "the sun",
+        "The Sun:Sun descript"
 
     );
     public static Skill Judgement = new Skill(
         "Judgement",
         "None", 0, 0, 0,
-        Skill.SkillType.Main, "null",
-        "Judgement"
+        Skill.SkillType.Main, "judgement",
+        "Judgement:Judgement descript"
 
     );
 #endregion
@@ -64,50 +64,50 @@ public static class SkillDB
     public static Skill Lovers = new Skill(
         "Lovers",
         "None", 0, 0, 0,
-        Skill.SkillType.Pasive, "null",
-        "The Lovers"
+        Skill.SkillType.Pasive, "the lovers",
+        "The Lovers:This amulet restores health over time"
 
     );
     public static Skill Hierophant = new Skill(
         "Hierophant",
         "None", 0, 0, 0,
-        Skill.SkillType.Pasive, "null",
-        "The Hierophant"
+        Skill.SkillType.Pasive, "the hierophant",
+        "The Hierophant:Hierophant descript"
 
     );
     public static Skill Strenght = new Skill(
         "Strenght",
         "None", 0, 0, 0,
-        Skill.SkillType.Pasive, "null",
-        "Strenght"
+        Skill.SkillType.Pasive, "strenght",
+        "Strenght:Strenght descript"
 
     );
     public static Skill Wheel = new Skill(
         "Wheel",
         "None", 0, 0, 0,
-        Skill.SkillType.Pasive, "null",
-        "The wheel of fortune"
+        Skill.SkillType.Pasive, "wheel of fortune",
+        "The wheel of fortune:Wheel descript"
 
     );
     public static Skill Temperance = new Skill(
         "Temperance",
         "None", 0, 0, 0,
-        Skill.SkillType.Pasive, "null",
-        "Temperance"
+        Skill.SkillType.Pasive, "temperance",
+        "Temperance:Temperance descript"
 
     );
     public static Skill Tower = new Skill(
         "Tower",
         "None", 0, 0, 0,
-        Skill.SkillType.Pasive, "null",
-        "The Tower"
+        Skill.SkillType.Pasive, "the tower",
+        "The Tower:Tower descript"
 
     );
     public static Skill Hanged = new Skill(
         "Hanged",
         "None", 0, 0, 0,
-        Skill.SkillType.Pasive, "null",
-        "The Hanged Man"
+        Skill.SkillType.Pasive, "the hanged man",
+        "The Hanged Man:XD"
 
     );
 #endregion
@@ -115,15 +115,15 @@ public static class SkillDB
 public static Skill Magician = new Skill(
         "Magician",
         "None", 0, 0, 0,
-        Skill.SkillType.Movement, "null",
-        "The Magician"
+        Skill.SkillType.Movement, "the magician",
+        "The Magician:Press right click to teleport a shot distance"
 
     );
     public static Skill Chariot = new Skill(
         "Chariot",
         "None", 0, 0, 0,
-        Skill.SkillType.Movement, "null",
-        "The Chariot"
+        Skill.SkillType.Movement, "the chariot",
+        "The Chariot:Carro"
 
     );
     
@@ -132,44 +132,44 @@ public static Skill Magician = new Skill(
 public static Skill Fool = new Skill(
         "Fool",
         "None", 0, 0, 0,
-        Skill.SkillType.Mask, "null",
-        "Everything is conected somehow. Even a lost wanderer like you."
+        Skill.SkillType.Mask, "the fool",
+        "Everything is conected somehow. Even a lost wanderer like you.:This mask grants 100 health points and 100 flux points"
 
     );public static Skill Priestess = new Skill(
         "Priestess",
         "None", 0, 0, 0,
-        Skill.SkillType.Mask, "null",
-        "The High Priestess"
+        Skill.SkillType.Mask, "the high priestess",
+        "The High Priestess:This mask grants 100 health points and 100 flux points"
 
     );public static Skill Emperor = new Skill(
         "Emperor",
         "None", 0, 0, 0,
-        Skill.SkillType.Mask, "null",
-        "The Emperor"
+        Skill.SkillType.Mask, "the emperor",
+        "The Emperor:This mask grants 100 health points and 100 flux points"
 
     );public static Skill Justice = new Skill(
         "Justice",
         "None", 0, 0, 0,
-        Skill.SkillType.Mask, "null",
-        "Justice"
+        Skill.SkillType.Mask, "justice",
+        "Justice:This mask grants 100 health points and 100 flux points"
 
     );public static Skill Death = new Skill(
         "Death",
         "None", 0, 0, 0,
-        Skill.SkillType.Mask, "null",
-        "Death doesn't make distinctions between the wealthy and the poor"
+        Skill.SkillType.Mask, "death",
+        "Death doesn't make distinctions between the wealthy and the poor:This mask grants 100 health points and 100 flux points"
     );
     public static Skill Star = new Skill(
         "Star",
         "None", 0, 0, 0,
-        Skill.SkillType.Mask, "null",
-        "The Star"
+        Skill.SkillType.Mask, "the star",
+        "The Star:This mask grants 100 health points and 100 flux points"
     );
     public static Skill World = new Skill(
         "World",
         "None", 0, 0, 0,
-        Skill.SkillType.Mask, "null",
-        "ZA WARUDO"
+        Skill.SkillType.Mask, "the world",
+        "ZA WARUDO:KONO DIO DA"
     );
 #endregion
     
