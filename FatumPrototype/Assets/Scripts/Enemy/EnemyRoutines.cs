@@ -40,36 +40,6 @@ public class EnemyRoutines : MonoBehaviour
             Shoot();
         ManageTimers();
     }
-    private void ChangeFocus(){
-        if(!miniStop){
-            
-            if(agent.remainingDistance < agent.stoppingDistance){
-            index ++;
-            miniStop = true;
-            if(index >= patrolPoints.Count)
-                index = 0;
-            
-            }
-            //UnityEngine.Debug.Log("index: "+index);
-        }
-        if(playerDetected){
-            //UnityEngine.Debug.Log(agent.remainingDistance);
-            //UnityEngine.Debug.Log(agent.remainingDistance <= shotingDistance*5.5f);
-            if(agent.remainingDistance <= shotingDistance*5.5f/* && agent.remainingDistance > maxRange*5.5f*/){
-                agent.isStopped = true;
-                posibleShot = true;
-                patroling = false;
-                selfBody.velocity = Vector3.zero;
-            }
-                
-            else{
-                agent.isStopped = false;
-                posibleShot = false;
-                patroling = true;
-            }
-                
-        }
-    }
     private void DetectPlayer(){
         if(POV.playerDetected){
             //UnityEngine.Debug.Log(Physics.Raycast(transform.position, playerTransform.position, 100f, obstacle));
@@ -95,6 +65,7 @@ public class EnemyRoutines : MonoBehaviour
     }
     private void Patrol(){
         agent.isStopped = false;
+        agent.speed = 3.5f;
         if(!miniStop){
             if(agent.remainingDistance < agent.stoppingDistance){
             index ++;
@@ -114,16 +85,21 @@ public class EnemyRoutines : MonoBehaviour
         float distance = Vector3.Distance(transform.position, playerTransform.position);
         if(distance < shotingDistance){
             agent.SetDestination(BackWards.position);
+            agent.speed = 6.5f;
             agent.isStopped = false;
             selfBody.isKinematic = false;
         }
         if(distance >= shotingDistance && distance < maxRange){
+            agent.speed = 4.5f;
             agent.isStopped = true;
             selfBody.isKinematic = true;
         }
-        else
+        else{
+            agent.speed = 4.5f;
             agent.isStopped = false;
             selfBody.isKinematic = false;
+        }
+            
 
     }
     private void ReturnToPatrol(){

@@ -56,16 +56,19 @@ public class EnemyBaseProjectile : MonoBehaviour
         }
     }
     void OnTriggerEnter(Collider collider){
+        
         UnityEngine.Debug.Log("COLLISION!");
         PlayerResources playerCont = GameObject.Find("Player").GetComponent<PlayerResources>();
         if(collider.gameObject.tag == "Player"){
             playerCont.TakeDamage(15f);
             UnityEngine.Debug.Log("PLAYER!");
+            Instantiate(Resources.Load("Fire") as GameObject, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
         else if(collider.gameObject.tag == "Ground"){
             //playerCont.TakeDamage(15f);
             //UnityEngine.Debug.Log("KABOOM!");
+            Instantiate(Resources.Load("Fire") as GameObject, transform.position, Quaternion.identity);
             Explode();
         }
     }
