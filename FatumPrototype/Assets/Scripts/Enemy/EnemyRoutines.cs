@@ -53,7 +53,11 @@ public class EnemyRoutines : MonoBehaviour
         }
         else{
             playerDetected = false;
-            miniStop = true;
+            if(!patroling){
+                miniStop = true;
+                patroling = true;
+            }
+                
         }  
     }
     private void Shoot(){
@@ -68,10 +72,10 @@ public class EnemyRoutines : MonoBehaviour
         agent.speed = 3.5f;
         if(!miniStop){
             if(agent.remainingDistance < agent.stoppingDistance){
-            index ++;
-            miniStop = true;
-            if(index >= patrolPoints.Count)
-                index = 0;
+                index ++;
+                miniStop = true;
+                if(index >= patrolPoints.Count)
+                    index = 0;
             
             }
         }

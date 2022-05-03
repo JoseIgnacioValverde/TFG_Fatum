@@ -1,0 +1,141 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2269297230012528841
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2269297230012528839}
+  - component: {fileID: 2269297230012528838}
+  - component: {fileID: 2269297230012528836}
+  - component: {fileID: 2269297230012528837}
+  - component: {fileID: 2269297230012528834}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2269297230012528839
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2269297230012528841}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: -0.15100259}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2269297230012528838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2269297230012528841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f8e3e7bfbe6b1a4ca031e90a1a9f919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 0}
+  inventory: {fileID: 0}
+  itemSelectedTransform: {fileID: 0}
+  pasiveSelected: {fileID: 0}
+  mainMask: {fileID: 0}
+  mainMov: {fileID: 0}
+  lastItemSelected: {fileID: 0}
+  inventorySelector: {fileID: 0}
+  itemSelected: {fileID: 0}
+  skillManager: {fileID: 0}
+  allSlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  allNames: []
+  moveImage: {fileID: 0}
+  maskImage: {fileID: 0}
+  pasive1Image: {fileID: 0}
+  pasive2Image: {fileID: 0}
+  mainSkill1: {fileID: 0}
+  mainSkill2: {fileID: 0}
+  mainSkill3: {fileID: 0}
+  mainSkill4: {fileID: 0}
+  mainSkill5: {fileID: 0}
+  pasiveSkill1: {fileID: 0}
+  pasiveSkill2: {fileID: 0}
+  movSkill: {fileID: 0}
+  maskSkill: {fileID: 0}
+  descriptionText: {fileID: 0}
+--- !u!114 &2269297230012528836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2269297230012528841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1581316cdd68917489e3e16d41b04158, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _manager: {fileID: 2269297230012528838}
+  _resources: {fileID: 0}
+  _dataManager: {fileID: 2269297230012528837}
+  currentMap: TestingScene
+--- !u!114 &2269297230012528837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2269297230012528841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e2e4a80bfe2a8c49bc3cb78501bfc55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  confirmPath: 
+  _manager: {fileID: 2269297230012528838}
+  _resources: {fileID: 0}
+  currentMap: TestingScene
+  spawnPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &2269297230012528834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2269297230012528841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d745fac81352b384e8d01c4a2bdce4db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
