@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System.Globalization;
 
 
 public class SaveDataManager : MonoBehaviour
@@ -28,7 +29,7 @@ public class SaveDataManager : MonoBehaviour
     {
         File.Delete(fullPath);
     }
-    public static void SaveData(string currentMap, string health, string mana, float posX, float posY, float posZ, List<InventorySlot> allSlots, string mainSkill1, string mainSkill2,
+    public static void SaveData(string currentMap, string health, string mana, int checkPointID, List<InventorySlot> allSlots, string mainSkill1, string mainSkill2,
     string mainSkill3, string mainSkill4, string mainSkill5, string pasiveSkill1, string pasiveSkill2, string mask, string movement){
         UnityEngine.Debug.Log("Saving Game");
         File.WriteAllText(fullPath, string.Empty);
@@ -37,7 +38,7 @@ public class SaveDataManager : MonoBehaviour
         string currentLevel = "CurrentLevel:" + currentMap;
         string playerHealth = "PlayerHealth:"+ health;
         string playerMana = "PlayerMana:"+ mana;
-        string Coords = "Coords:"+posX+","+posY+","+posZ;
+        string Checkpoint = "Checkpoint:"+checkPointID;
         string itemsState = "Items:";
         string mainSkills = "MainSkillEquiped:"+mainSkill1+","+mainSkill2+","+mainSkill3+","+mainSkill4
         +","+mainSkill5;
@@ -52,20 +53,11 @@ public class SaveDataManager : MonoBehaviour
         if(itemsState[itemsState.Length-1].ToString().Equals(","))
             itemsState = itemsState.Substring(0, itemsState.Length - 1);
         
-        /*UnityEngine.Debug.Log(currentLevel);
-        UnityEngine.Debug.Log(playerHealth);
-        UnityEngine.Debug.Log(playerMana);
-        UnityEngine.Debug.Log(Coords);
-        UnityEngine.Debug.Log(itemsState);
-        UnityEngine.Debug.Log(mainSkills);
-        UnityEngine.Debug.Log(pasiveSkillsEquiped);
-        UnityEngine.Debug.Log(maskEquiped);
-        UnityEngine.Debug.Log(movEquiped);*/
 
         writer.WriteLine(currentLevel);
         writer.WriteLine(playerHealth);
         writer.WriteLine(playerMana);
-        writer.WriteLine(Coords);
+        writer.WriteLine(Checkpoint);
         writer.WriteLine(itemsState);
         writer.WriteLine(mainSkills);
         writer.WriteLine(pasiveSkillsEquiped);
@@ -147,13 +139,11 @@ public class SaveDataManager : MonoBehaviour
         }
         
     }
-    public void LoadPlayer(){
+    public string LoadPlayer(){
         string line;
         string pHealth = "";
         string pMana = "";
-        string xCoord = "";
-        string yCoord = "";
-        string zCoord = "";
+        string checkpointID = "";
         StreamReader file = new StreamReader(fullPath);
         while((line = file.ReadLine())!=null){
             string[] word = line.Split(':');
@@ -164,21 +154,22 @@ public class SaveDataManager : MonoBehaviour
             if(word[0] == "PlayerMana"){
                 pMana = word[1];
             }
-            if(word[0] == "Coords"){
-                string[] coordinates = word[1].Split(',');
-                xCoord = coordinates[0];
-                yCoord = coordinates[1];
-                zCoord = coordinates[2];
+            if(word[0] == "Checkpoint"){
+                checkpointID = word[1];
             }
         }
         file.Close();
+        string[] auxiliar = pHealth.Split(',');
+        pHealth = auxiliar[0]+".0";
+        auxiliar = pMana.Split(',');
+        pMana = auxiliar[0]+".0";
         //para asegurar que los floats están en el formato que queremos usamos el System.Globalization.NumberStyles
+        //float.TryParse(pHealth, System.Globalization.NumberStyles.Float, new System.Globalization.CultureInfo("es-ES"), out _resources.health);
         _resources.health = float.Parse(pHealth, System.Globalization.NumberStyles.Float, new System.Globalization.CultureInfo("en-US"));
         _resources.mana = float.Parse(pMana, System.Globalization.NumberStyles.Float, new System.Globalization.CultureInfo("en-US"));
-        float x = float.Parse(xCoord, System.Globalization.NumberStyles.Float, new System.Globalization.CultureInfo("en-US"));
-        float y = float.Parse(yCoord, System.Globalization.NumberStyles.Float, new System.Globalization.CultureInfo("en-US"));
-        float z = float.Parse(zCoord, System.Globalization.NumberStyles.Float, new System.Globalization.CultureInfo("en-US"));
-        _resources.self.position = new Vector3(x,y,z);
+        UnityEngine.Debug.Log("checkpoint3"+checkpointID);
+        return checkpointID;
+        
     }
     public void LoadActualLevel(){
         string line;
@@ -192,5 +183,6 @@ public class SaveDataManager : MonoBehaviour
             }
         }
         file.Close();
+        currentMap = stage;
     }
 }

@@ -7,14 +7,33 @@ public class GameManager : MonoBehaviour
     public InventoryManager _manager;
     public PlayerResources _resources;
     public SaveDataManager _dataManager;
-    public string currentMap;
+    public List<InventorySlate> slates;
+    public InventorySlate actualSlate;
+    public string currentMap, currentSavedMap;
     private float gravity = -9.8f;
+    private string checkpoint;
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        _dataManager.LoadInventory();
-//        _dataManager.LoadPlayer();
-        _manager.SetAllImages();
+    
+        if(currentMap != "Main Menu"){
+            Cursor.lockState = CursorLockMode.Locked;
+            actualSlate = slates[0];
+        }
+        
+        bool fileExist = SaveDataManager.GameDataFileExists();
+        if(fileExist){
+            _dataManager.LoadActualLevel();
+            currentSavedMap = _dataManager.currentMap;
+            if(currentMap!= "Main Menu"){
+                _dataManager.LoadInventory();
+                checkpoint = _dataManager.LoadPlayer();
+                _manager.SetAllImages();
+                LoadPlayerOnCheckpoint();
+            }
+            
+        }
+        
+        
     }
     void Awake(){
         
@@ -26,8 +45,8 @@ public class GameManager : MonoBehaviour
         
     }
     public void SaveGameData(){
-        SaveDataManager.SaveData(currentMap, _resources.health.ToString(), _resources.mana.ToString(), 
-        _resources.self.position.x,_resources.self.position.y,_resources.self.position.z, _manager.allSlots, 
+        Transform playerTransform = GameObject.Find("Player").GetComponent<Transform>();
+        SaveDataManager.SaveData(currentMap, _resources.health.ToString(), _resources.mana.ToString(), actualSlate.id, _manager.allSlots, 
         _manager.mainSkill1.skillName, _manager.mainSkill2.skillName, _manager.mainSkill3.skillName, _manager.mainSkill4.skillName, _manager.mainSkill5.skillName, 
         _manager.pasiveSkill1.skillName, _manager.pasiveSkill2.skillName, _manager.maskSkill.skillName, _manager.movSkill.skillName);
     }
@@ -50,5 +69,31 @@ public class GameManager : MonoBehaviour
         //UnityEngine.Debug.Log("VelocityBoom2: "+Mathf.Sqrt(2*movementY - height)/gravity);
         //UnityEngine.Debug.Log("VelocityXZ: "+velocityXZ);
         return (velocityXZ + velocityY);
+    }
+    public void LoadPlayerOnCheckpoint(){
+        for(int i = 0; i<slates.Count; i++){
+            UnityEngine.Debug.Log("Checkpoint:"+checkpoint.ToString());
+            UnityEngine.Debug.Log("Checkpoint2:"+slates[i].id.ToString());
+            if(slates[i].id.ToString() == checkpoint){
+
+                Transform playerTransform = GameObject.Find("Player").GetComponent<Transform>();
+                Vector3 position = new Vector3(slates[i].coordX,slates[i].coordY,slates[i].coordZ);
+                playerTransform.position = position;
+            }
+            else
+                UnityEngine.Debug.Log("No entro");
+        }
+    }
+    public void LoadSpecificLevel(){
+        MenuManager.LoadSpecificScene(currentSavedMap);
+    }
+    public void LoadFirstLevel(){
+        MenuManager.LoadFirstLevel();
+    }
+    public void ExitGame(){
+        MenuManager.ExitGame();
+    }
+    public void ReturnToMenu(){
+        MenuManager.ReturnToMenu();
     }
 }

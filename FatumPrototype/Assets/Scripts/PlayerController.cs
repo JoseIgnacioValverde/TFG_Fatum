@@ -75,29 +75,20 @@ public class PlayerController : MonoBehaviour
     }
     public void OnCollisionEnter(Collision collision){
         if(collision.gameObject.tag == "SaveSlot"){
-            //UnityEngine.Debug.Log("Check");
             onInventorySlate = true;
-            if(!saved){
-                dataManager.SaveGameData();
-                saved = true;
-            }
         }
         else{
             onInventorySlate = false;
-            saved = false;
         }
-        //UnityEngine.Debug.Log("On Inventory Slate = "+onInventorySlate.ToString());
     }
     public void DisableCamera(){
         if(canMove){
             _camera.m_YAxis.m_MaxSpeed = 8f;
             _camera.m_XAxis.m_MaxSpeed = 800f;
-            Cursor.lockState = CursorLockMode.Locked;
         }
         else{
             _camera.m_YAxis.m_MaxSpeed = 0;
             _camera.m_XAxis.m_MaxSpeed = 0;
-            Cursor.lockState = CursorLockMode.None;
         }
         
     }
