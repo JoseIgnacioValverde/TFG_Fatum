@@ -16,14 +16,17 @@ public class PuzzleWithTimeManager : MonoBehaviour
     {
         switch(puzzleType){
             case 0:
+            case 3:
                 movingDistance1 = platform.position.y;
                 movingDistance2 = platform.position.y -lowerDistance*modifier;
             break;
             case 1:
+            case 4:
                 movingDistance1 = platform.position.x;
                 movingDistance2 = platform.position.x -lowerDistance*modifier;
             break;
             case 2:
+            case 5:
                 movingDistance1 = platform.position.z;
                 movingDistance2 = platform.position.z -lowerDistance*modifier;
             break;
@@ -96,6 +99,66 @@ public class PuzzleWithTimeManager : MonoBehaviour
                     }
                 }
             break;
+            case 3:
+            if(!allPressurePlatesPressed){
+                CheckAllPlates();
+                UnityEngine.Debug.Log("Bruh");
+                if(platform.position.y > movingDistance1&&!disabled){
+
+                    ReturnDoor();
+                }
+            }
+            else{
+                UnityEngine.Debug.Log("Bruh2");
+                if(platform.position.y <= movingDistance2){
+                    UnityEngine.Debug.Log("Bruh3");
+                    LowerDoor();
+                }
+            }
+            if(disabled){
+                if(platform.position.y <= movingDistance2){
+                    LowerDoor();
+                }
+            }
+            break;
+            case 4:
+                if(!allPressurePlatesPressed){
+                    CheckAllPlates();
+                    if(platform.position.x > movingDistance1&&!disabled){
+                        UnityEngine.Debug.Log("Hello");
+                        ReturnDoor();
+                    }
+                }
+                else{
+                    if(platform.position.x <= movingDistance2){
+                        LowerDoor();
+                    }
+                }
+                if(disabled){
+                    if(platform.position.x <= movingDistance2){
+                        LowerDoor();
+                }
+                }
+            break;
+            case 5:
+                if(!allPressurePlatesPressed){
+                    CheckAllPlates();
+                    if(platform.position.z > movingDistance1&&!disabled){
+                        UnityEngine.Debug.Log("Hello");
+                        ReturnDoor();
+                    }
+                }
+                else{
+                    if(platform.position.z <= movingDistance2){
+                        LowerDoor();
+                    }
+                }
+                if(disabled){
+                    if(platform.position.z <= movingDistance2){
+                        LowerDoor();
+                    }
+                }
+            break;
             default:
             break;
         }
@@ -129,16 +192,19 @@ public class PuzzleWithTimeManager : MonoBehaviour
     private void LowerDoor(){
         switch(puzzleType){
             case 0:
+            case 3:
                 Vector3 a = platform.position;
                 Vector3 b = new Vector3(platform.position.x, movingDistance2, platform.position.z);
                 platform.position = Vector3.MoveTowards(a, Vector3.Lerp(a,b,timeToMove), speed);
             break;
             case 1:
+            case 4:
                 Vector3 c = platform.position;
                 Vector3 d = new Vector3(movingDistance2, platform.position.y, platform.position.z);
                 platform.position = Vector3.MoveTowards(c, Vector3.Lerp(c,d,timeToMove), speed);
             break;
             case 2:
+            case 5:
                 Vector3 e = platform.position;
                 Vector3 f = new Vector3(platform.position.x, platform.position.y, movingDistance2);
                 platform.position = Vector3.MoveTowards(e, Vector3.Lerp(e,f,timeToMove), speed);
@@ -151,16 +217,19 @@ public class PuzzleWithTimeManager : MonoBehaviour
     private void ReturnDoor(){
         switch(puzzleType){
             case 0:
+            case 3:
                 Vector3 a = platform.position;
                 Vector3 b = new Vector3(platform.position.x, movingDistance1, platform.position.z);
                 platform.position = Vector3.MoveTowards(a, Vector3.Lerp(a,b,timeToMove), speed);
             break;
             case 1:
+            case 4:
                 Vector3 c = platform.position;
                 Vector3 d = new Vector3(movingDistance1, platform.position.y, platform.position.z);
                 platform.position = Vector3.MoveTowards(c, Vector3.Lerp(c,d,timeToMove), speed);
             break;
             case 2:
+            case 5:
                 Vector3 e = platform.position;
                 Vector3 f = new Vector3(platform.position.x, platform.position.y, movingDistance1);
                 platform.position = Vector3.MoveTowards(e, Vector3.Lerp(e,f,timeToMove), speed);

@@ -3099,7 +3099,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Priestess
-  unlocked: 1
+  unlocked: 0
   active: 0
   equiped: 0
   self: {fileID: 7510724954863630235}
@@ -3835,7 +3835,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Chariot
-  unlocked: 1
+  unlocked: 0
   active: 0
   equiped: 0
   self: {fileID: 7510724955169182739}
@@ -5725,7 +5725,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Hermit
-  unlocked: 1
+  unlocked: 0
   active: 0
   equiped: 0
   self: {fileID: 7510724955917479583}
@@ -6157,7 +6157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Lovers
-  unlocked: 1
+  unlocked: 0
   active: 0
   equiped: 0
   self: {fileID: 7510724956060518361}
@@ -6301,7 +6301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Strenght
-  unlocked: 1
+  unlocked: 0
   active: 0
   equiped: 0
   self: {fileID: 7510724956162178712}
@@ -6589,7 +6589,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Hierophant
-  unlocked: 1
+  unlocked: 0
   active: 0
   equiped: 0
   self: {fileID: 7510724956390333570}
@@ -7021,7 +7021,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Emperor
-  unlocked: 1
+  unlocked: 0
   active: 0
   equiped: 0
   self: {fileID: 7510724956420366146}
@@ -7672,7 +7672,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: Magician
-  unlocked: 1
+  unlocked: 0
   active: 0
   equiped: 0
   self: {fileID: 7510724956556472936}
