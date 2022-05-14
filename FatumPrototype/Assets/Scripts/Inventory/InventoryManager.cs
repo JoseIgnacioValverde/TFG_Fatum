@@ -319,4 +319,21 @@ public class InventoryManager : MonoBehaviour
         //pasiveSkill1.GetComponentInParent<Image>().sprite = auxiliar.skillSprite;
         //InventorySlot auxiliar2 = allSlots.Find("Hermit");
     }
+    public InventorySlot FindItemSlot(string itemName){
+        InventorySlot invSlot = null;
+        foreach(InventorySlot auxSlot in allSlots){
+            if(auxSlot.skillName == itemName){
+                invSlot = auxSlot;
+            }
+        }
+        return invSlot;
+    }
+    public void UnlockItem(string itemName){
+        if(allNames.Contains(itemName)){
+            InventorySlot updatedSlot = FindItemSlot(itemName);
+            updatedSlot.unlocked = true;
+            controller.dataManager.SaveGameData();
+        }
+        
+    }
 }

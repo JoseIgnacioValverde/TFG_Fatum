@@ -12,8 +12,12 @@ public class EnemyRoutines : MonoBehaviour
     private Transform lastWayPoint;
     private Rigidbody selfBody;
     public ResourcesManager resources;
-    public float timeBetweenPatrols = 5f, timeToReturnPatrol = 2f, timerPatrol = 0, timerSearch = 0, reloadTimer = 0, reloadSpeed = 3f, shotingDistance = 10f, maxRange = 20f;
-    public bool miniStop = false, patroling = false, chasing = false, searching = false, playerDetected = false, shootReady = false, posibleShot = false;
+    public float timeBetweenPatrols = 5f, timeToReturnPatrol = 
+    2f, timerPatrol = 0, timerSearch = 0, reloadTimer = 0, 
+    reloadSpeed = 3f, shotingDistance = 10f, maxRange = 20f;
+    public bool miniStop = false, patroling = false,
+     chasing = false, searching = false, 
+     playerDetected = false, shootReady = false, posibleShot = false;
     private int index = 0;
     public LayerMask obstacle;
     // Start is called before the first frame update

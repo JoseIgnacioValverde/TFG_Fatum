@@ -29,8 +29,11 @@ public class SaveDataManager : MonoBehaviour
     {
         File.Delete(fullPath);
     }
-    public static void SaveData(string currentMap, string health, string mana, int checkPointID, List<InventorySlot> allSlots, string mainSkill1, string mainSkill2,
-    string mainSkill3, string mainSkill4, string mainSkill5, string pasiveSkill1, string pasiveSkill2, string mask, string movement){
+    public static void SaveData(string currentMap, string health, 
+    string mana, int checkPointID, List<InventorySlot> allSlots, 
+    string mainSkill1, string mainSkill2, string mainSkill3, 
+    string mainSkill4, string mainSkill5, string pasiveSkill1, 
+    string pasiveSkill2, string mask, string movement){
         UnityEngine.Debug.Log("Saving Game");
         File.WriteAllText(fullPath, string.Empty);
         StreamWriter writer = new StreamWriter(fullPath, false);

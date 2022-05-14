@@ -31,7 +31,7 @@ public class PressurePlate : MonoBehaviour
         Vector3 b = new Vector3(transform.position.x, height2, transform.position.z);
         transform.position = Vector3.MoveTowards(a, Vector3.Lerp(a,b,time), maxSpeed);
     }
-    private void ElevatePlate(){
+    public void ElevatePlate(){
         Vector3 a = transform.position;
         Vector3 b = new Vector3(transform.position.x, height, transform.position.z);
         transform.position = Vector3.MoveTowards(a, Vector3.Lerp(a,b,time), maxSpeed);
