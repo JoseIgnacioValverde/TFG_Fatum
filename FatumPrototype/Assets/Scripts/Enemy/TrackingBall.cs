@@ -42,7 +42,7 @@ public class TrackingBall : MonoBehaviour
         }
         if(collision.collider.transform.GetComponent<PlayerResources>()){
             if(TargetingPlayer){
-                collision.collider.transform.GetComponent<PlayerResources>().TakeDamage(15f);
+                collision.collider.transform.GetComponent<PlayerResources>().TakeDamage(10f);
                 Destroy(this.gameObject);
             }
             
@@ -53,6 +53,10 @@ public class TrackingBall : MonoBehaviour
                 Destroy(this.gameObject);
             }
             
+        }
+        else{
+            if(TargetingPlayer)
+                Destroy(this.gameObject);
         }
     }
 }

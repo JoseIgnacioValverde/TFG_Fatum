@@ -18,10 +18,14 @@ public class Eraser : MonoBehaviour
         if(DestroyTimer >=MinDamageInterval && DestroyTimer <MaxDamageInterval){
             Collider[] colliders = Physics.OverlapSphere(transform.position, 2.5f);
             foreach(Collider collider in colliders){
-                if(collider.GetComponent<PlayerResources>()){
+                if(collider.GetComponent<ThunderSlate>()){
+                    UnityEngine.Debug.Log("SlateActivate");
+                    collider.GetComponent<ThunderSlate>().Activate();
+                }
+                else if(collider.GetComponent<PlayerResources>()){
                     collider.GetComponent<PlayerResources>().TakeDamage(20f);
                     Destroy(this.gameObject);
-                }
+                } 
             }
         }
             

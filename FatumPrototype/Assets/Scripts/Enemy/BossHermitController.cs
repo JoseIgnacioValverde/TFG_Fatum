@@ -10,8 +10,8 @@ public class BossHermitController : MonoBehaviour
     public int hits = 3;
     public int maxShots = 1;
     private int remainingShots;
-    private float AttackToExecute = -1f, TimeBetweenAttacks = 5f, TimeBetweenTeleports = 15f, TimerTeleport = 0, TimerAttack =0, TeleportingTime = 0.5f, TimerOnAttack = 0, TimeAttacking = 1f;
-    private bool Teleporting, Attacking, AttackSecuence, TeleportOnCooldown, AttacksOnCooldown;
+    private float AttackToExecute = -1f, TimeBetweenAttacks = 5f, TimeBetweenTeleports = 15f, TimerTeleport = 0, TimerAttack =0, TeleportingTime = 0.5f, TimerOnAttack = 0, TimeAttacking = 1f, distanceWithPlayer;
+    private bool Teleporting, Attacking, AttackSecuence, TeleportOnCooldown, AttacksOnCooldown, isDead;
     private int TeleportIndex = -1;
 
     // Start is called before the first frame update
@@ -21,57 +21,67 @@ public class BossHermitController : MonoBehaviour
         AttacksOnCooldown = true;
         Teleporting = false;
         Attacking = false;
+        isDead = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(playerTransform);
-        if(!Attacking){
-            if(TeleportOnCooldown){
-                TimerTeleport += Time.deltaTime;
-            if(TimerTeleport >=TimeBetweenTeleports){
-                TimerTeleport = 0f;
-                TeleportOnCooldown = false;
-            }
+        if(!isDead){
+            transform.LookAt(playerTransform);
+            if(!Attacking){
+                if(TeleportOnCooldown){
+                    TimerTeleport += Time.deltaTime;
+                if(TimerTeleport >=TimeBetweenTeleports){
+                    TimerTeleport = 0f;
+                    TeleportOnCooldown = false;
+                }
             
 
-        }
-            else{
-                Teleporting = true;
-                Teleport();
             }
-        }
-        if(!Teleporting){
-            if(AttacksOnCooldown){
-                TimerAttack +=Time.deltaTime;
-                if(TimerAttack >= TimeBetweenAttacks)
-                {
-                    TimerAttack = 0f;
-                    AttacksOnCooldown = false;
-                    remainingShots = maxShots;
-                    Attacking = true;
+                else{
+                    Teleporting = true;
+                    Teleport();
                 }
             }
-            if(Attacking){
-                TimerOnAttack += Time.deltaTime;
-                if(TimerOnAttack >= TimeAttacking){
-                    float rng = Random.Range(0f,1f);
-                    if(rng <=0.1){
-                        AttackBall();
+            if(!Teleporting){
+                if(AttacksOnCooldown){
+                    TimerAttack +=Time.deltaTime;
+                    if(TimerAttack >= TimeBetweenAttacks)
+                    {
+                        TimerAttack = 0f;
+                        AttacksOnCooldown = false;
+                        remainingShots = maxShots;
+                        Attacking = true;
                     }
-                    else{
-                        AttackLightning();
-                    }
+                }
+                if(Attacking){
+                    TimerOnAttack += Time.deltaTime;
+                    if(TimerOnAttack >= TimeAttacking){
+                        float rng = Random.Range(0f,1f);
+                        if(rng <=0.1){
+                            AttackBall();
+                        }
+                        else{
+                            AttackLightning();
+                        }
                     
-                    TimerOnAttack = 0;
-                }
-                if(remainingShots < 1){
-                    Attacking = false;
-                    AttacksOnCooldown = true;
+                        TimerOnAttack = 0;
+                    }
+                    if(remainingShots < 1){
+                        Attacking = false;
+                        AttacksOnCooldown = true;
+                    }
                 }
             }
+            distanceWithPlayer = Vector3.Distance(playerTransform.position, transform.position);
+            if(distanceWithPlayer <= 20f){
+                Teleport();
+                TimerTeleport = 0f;
+                TeleportOnCooldown = true;
+            }
         }
+        CheckDeath();
         
 
 
@@ -103,6 +113,12 @@ public class BossHermitController : MonoBehaviour
     public void TakeHit(){
         if(hits >0){
             hits--;
+        }
+    }
+    private void CheckDeath(){
+        if(hits <= 0){
+            isDead = true;
+            transform.gameObject.SetActive(false);
         }
     }
         

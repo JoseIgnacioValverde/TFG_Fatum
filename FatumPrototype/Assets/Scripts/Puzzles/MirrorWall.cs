@@ -5,14 +5,16 @@ using UnityEngine;
 public class MirrorWall : MonoBehaviour
 {
     // Start is called before the first frame update
+    public bool hitRecieved;
     void Start()
     {
-        
+        hitRecieved = false;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
+    void OnCollisionEnter(Collision other){
+        if(other.collider.GetComponent<TrackingBall>()){
+            hitRecieved = true;
+        }
     }
 }

@@ -125,6 +125,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: HD_Platform_1A
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: af7b8785698bb30479cdffb3d749add9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: af7b8785698bb30479cdffb3d749add9, type: 3}
+      propertyPath: m_TagString
+      value: SaveSlot
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: af7b8785698bb30479cdffb3d749add9, type: 3}
       propertyPath: m_RootOrder
       value: 0

@@ -26,6 +26,14 @@ public class PressurePlate : MonoBehaviour
         }
 
     }
+    void OnTriggerEnter(Collider other)
+	{
+		if (other.tag == "Player") {
+			if(!activated){
+                activated = true;
+            }
+		}
+	}
     private void LowerPlate(){
         Vector3 a = transform.position;
         Vector3 b = new Vector3(transform.position.x, height2, transform.position.z);

@@ -9,6 +9,7 @@ public class FatumItem : MonoBehaviour
     public string ItemName;
     public Canvas canvas;
     public InventoryManager manager;
+    public ItemPresetActivator itemPreset;
     public bool PlayerIn;
     void Start()
     {
@@ -21,6 +22,7 @@ public class FatumItem : MonoBehaviour
         if(PlayerIn&&Input.GetButton("Collect")){
                 UnityEngine.Debug.Log("Papoi");
                 manager.UnlockItem(ItemName);
+                itemPreset.enabled = false;
                 canvas.gameObject.SetActive(false);
                 transform.gameObject.SetActive(false);
 

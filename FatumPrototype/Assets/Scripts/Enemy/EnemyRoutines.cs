@@ -12,12 +12,13 @@ public class EnemyRoutines : MonoBehaviour
     private Transform lastWayPoint;
     private Rigidbody selfBody;
     public ResourcesManager resources;
+    public Animator animator;
     public float timeBetweenPatrols = 5f, timeToReturnPatrol = 
-    2f, timerPatrol = 0, timerSearch = 0, reloadTimer = 0, 
-    reloadSpeed = 3f, shotingDistance = 10f, maxRange = 20f;
-    public bool miniStop = false, patroling = false,
+    2f, timerPatrol = 0, timerSearch = 0, reloadTimer = 0, loadTime = 0.25f, 
+    reloadSpeed = 3f, shotingDistance = 10f, maxRange = 20f, shotTimer;
+    public bool miniStop = false, patroling = false, isInAnimation = false,
      chasing = false, searching = false, 
-     playerDetected = false, shootReady = false, posibleShot = false;
+     playerDetected = false, shootReady = false, posibleShot = false, loadingShot = false;
     private int index = 0;
     public LayerMask obstacle;
     // Start is called before the first frame update
@@ -31,6 +32,7 @@ public class EnemyRoutines : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(agent.speed);
         Debug.DrawLine(transform.position, playerTransform.position, Color.blue);
         DetectPlayer();
         if(playerDetected){
@@ -40,9 +42,10 @@ public class EnemyRoutines : MonoBehaviour
             Patrol();
 
         posibleShot = playerDetected && CheckAttackRange();
-        if(posibleShot)
+        if(posibleShot&&!isInAnimation)
             Shoot();
         ManageTimers();
+        animator.SetFloat("Speed",agent.speed);
     }
     private void DetectPlayer(){
         if(POV.playerDetected){
@@ -66,21 +69,35 @@ public class EnemyRoutines : MonoBehaviour
     }
     private void Shoot(){
         if(shootReady){
-            Instantiate(Resources.Load("Projectile") as GameObject, projectileStart.position, Quaternion.identity);
+            animator.SetTrigger("Attack");
+            isInAnimation = true;
+            StartCoroutine(stopAnimation(1f));
+            StartCoroutine(WeildAttack(1f));
+            //Instantiate(Resources.Load("Projectile") as GameObject, projectileStart.position, Quaternion.identity);
             shootReady = false;
+            
+            
+            
+        }
+        else{
         }
         
     }
     private void Patrol(){
         agent.isStopped = false;
-        agent.speed = 3.5f;
         if(!miniStop){
-            if(agent.remainingDistance < agent.stoppingDistance){
+            if(agent.remainingDistance <= agent.stoppingDistance){
+                agent.isStopped = true;
+                agent.speed = 0;
                 index ++;
                 miniStop = true;
                 if(index >= patrolPoints.Count)
                     index = 0;
             
+            }
+            else{
+                agent.isStopped = false;
+                agent.speed =3.5f;
             }
         }
     }
@@ -94,18 +111,21 @@ public class EnemyRoutines : MonoBehaviour
         if(distance < shotingDistance){
             agent.SetDestination(BackWards.position);
             agent.speed = 6.5f;
+            isInAnimation = true;
             agent.isStopped = false;
             selfBody.isKinematic = false;
         }
         if(distance >= shotingDistance && distance < maxRange){
-            agent.speed = 4.5f;
+            agent.speed = 0f;
             agent.isStopped = true;
+            isInAnimation = false;
             selfBody.isKinematic = true;
         }
         else{
             agent.speed = 4.5f;
             agent.isStopped = false;
             selfBody.isKinematic = false;
+            isInAnimation = true;
         }
             
 
@@ -122,6 +142,7 @@ public class EnemyRoutines : MonoBehaviour
     private void ManageTimers(){
 
         if(miniStop){
+            animator.SetFloat("Speed",0);
             timerPatrol+=Time.deltaTime;
             if(timerPatrol >timeBetweenPatrols){
                 timerPatrol = 0f;
@@ -147,4 +168,15 @@ public class EnemyRoutines : MonoBehaviour
                 reloadTimer += Time.deltaTime;
         }
     }
+    public IEnumerator stopAnimation(float length)
+	{
+		yield return new WaitForSeconds(length); 
+		isInAnimation = false;
+	}
+    public IEnumerator WeildAttack(float length)
+	{
+		yield return new WaitForSeconds(length); 
+        Instantiate(Resources.Load("Projectile") as GameObject, projectileStart.position, Quaternion.identity);
+		isInAnimation = false;
+	}
 }
