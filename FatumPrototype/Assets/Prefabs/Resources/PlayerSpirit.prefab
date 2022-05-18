@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 3605382487843625043}
   - component: {fileID: 3605382487843625042}
   - component: {fileID: 3605382487843625044}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PlayerSpirit
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,6 +146,7 @@ MonoBehaviour:
   rb: {fileID: 3605382487843625043}
   speed: 6
   jumpForce: 5
+  resources: {fileID: 0}
   _camera: {fileID: 0}
   checkDistance: 0.25
   GroundCheck: {fileID: 3605382488719581083}
@@ -155,8 +156,12 @@ MonoBehaviour:
   playerTransform: {fileID: 3605382487843625134}
   canJump: 0
   canMove: 1
+  saved: 0
   onInventorySlate: 0
   tempLogic: {fileID: 0}
+  skillMan: {fileID: 0}
+  dataManager: {fileID: 0}
+  clone: 1
 --- !u!1 &3605382488394564160
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,9 +174,9 @@ GameObject:
   - component: {fileID: 3605382488394564164}
   - component: {fileID: 3605382488394564163}
   - component: {fileID: 3605382488394564162}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -261,7 +266,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3605382488719581083}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}

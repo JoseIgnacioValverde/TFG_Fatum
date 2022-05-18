@@ -102,16 +102,16 @@ public class PuzzleWithTimeManager : MonoBehaviour
             case 3:
             if(!allPressurePlatesPressed){
                 CheckAllPlates();
-                UnityEngine.Debug.Log("Bruh");
+                //UnityEngine.Debug.Log("Bruh");
                 if(platform.position.y > movingDistance1&&!disabled){
 
                     ReturnDoor();
                 }
             }
             else{
-                UnityEngine.Debug.Log("Bruh2");
+                //UnityEngine.Debug.Log("Bruh2");
                 if(platform.position.y <= movingDistance2){
-                    UnityEngine.Debug.Log("Bruh3");
+                    //UnityEngine.Debug.Log("Bruh3");
                     LowerDoor();
                 }
             }
@@ -125,7 +125,7 @@ public class PuzzleWithTimeManager : MonoBehaviour
                 if(!allPressurePlatesPressed){
                     CheckAllPlates();
                     if(platform.position.x > movingDistance1&&!disabled){
-                        UnityEngine.Debug.Log("Hello");
+                        //UnityEngine.Debug.Log("Hello");
                         ReturnDoor();
                     }
                 }
@@ -144,7 +144,7 @@ public class PuzzleWithTimeManager : MonoBehaviour
                 if(!allPressurePlatesPressed){
                     CheckAllPlates();
                     if(platform.position.z > movingDistance1&&!disabled){
-                        UnityEngine.Debug.Log("Hello");
+                        //UnityEngine.Debug.Log("Hello");
                         ReturnDoor();
                     }
                 }
@@ -177,12 +177,12 @@ public class PuzzleWithTimeManager : MonoBehaviour
         
     }
     private void ResetAllPlates(){
-        UnityEngine.Debug.Log("Reset");
+        //UnityEngine.Debug.Log("Reset");
         foreach(PressurePlate plate in switches){
             if(plate.activated == true){
                 plate.activated = false;
                 plate.ElevatePlate();
-                UnityEngine.Debug.Log("PlateReset =" + !plate.activated);
+                //UnityEngine.Debug.Log("PlateReset =" + !plate.activated);
             }
                 
 

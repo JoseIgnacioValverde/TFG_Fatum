@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ItemMover : MonoBehaviour
 {
     public Canvas canvas;
+    public TextMeshProUGUI description;
     public GameObject itemToUnlock;
     public bool PlayerIn;
     // Start is called before the first frame update
@@ -25,6 +27,7 @@ public class ItemMover : MonoBehaviour
     void OnTriggerEnter(Collider other)
 	{
 		if (other.tag == "Player") {
+            description.text = "Press E";
 			canvas.gameObject.SetActive(true);
             PlayerIn = true;
 		}

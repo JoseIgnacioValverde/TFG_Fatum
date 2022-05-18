@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InventorySlate : MonoBehaviour
 {
-    public int id;
+    public float id;
     public float coordX;
     public float coordY;
     public float coordZ;

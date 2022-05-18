@@ -19,7 +19,7 @@ public static class SkillDB
 #region MainSkills
     public static Skill Hermit = new Skill(
         "Hermit",
-        "UseHermitSkill", 0, 0, 0,
+        "UseHermitSkill", 1, 30f, 1f,
         Skill.SkillType.Main, "the hermit",
         "The Hermit walks through every plane, wandering, but never lost on it's way:Press left click to leave your body and wander on the spiritual plane. Beware, your body can still be damaged."
 

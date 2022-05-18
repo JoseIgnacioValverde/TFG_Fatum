@@ -30,7 +30,7 @@ public class SaveDataManager : MonoBehaviour
         File.Delete(fullPath);
     }
     public static void SaveData(string currentMap, string health, 
-    string mana, int checkPointID, List<InventorySlot> allSlots, 
+    string mana, float checkPointID, List<InventorySlot> allSlots, 
     string mainSkill1, string mainSkill2, string mainSkill3, 
     string mainSkill4, string mainSkill5, string pasiveSkill1, 
     string pasiveSkill2, string mask, string movement){
@@ -152,7 +152,6 @@ public class SaveDataManager : MonoBehaviour
             string[] word = line.Split(':');
             if(word[0]=="PlayerHealth"){
                 pHealth = word[1];
-                break;
             }
             if(word[0] == "PlayerMana"){
                 pMana = word[1];
@@ -170,7 +169,7 @@ public class SaveDataManager : MonoBehaviour
         //float.TryParse(pHealth, System.Globalization.NumberStyles.Float, new System.Globalization.CultureInfo("es-ES"), out _resources.health);
         _resources.health = float.Parse(pHealth, System.Globalization.NumberStyles.Float, new System.Globalization.CultureInfo("en-US"));
         _resources.mana = float.Parse(pMana, System.Globalization.NumberStyles.Float, new System.Globalization.CultureInfo("en-US"));
-        UnityEngine.Debug.Log("checkpoint3"+checkpointID);
+//        UnityEngine.Debug.Log("checkpoint3"+checkpointID);
         return checkpointID;
         
     }

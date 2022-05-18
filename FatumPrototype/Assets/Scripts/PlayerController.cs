@@ -17,10 +17,13 @@ public class PlayerController : MonoBehaviour
     public LayerMask GroundMask;
     public Transform playerTransform;
     public bool canJump;
-    public bool canMove =true, saved = false;
+    public bool canMove =true, saved = false, mainSkillOnCooldown =false;
     public bool onInventorySlate;
     public SkillsLogic tempLogic;
+    public SkillManager skillMan;
     public GameManager dataManager;
+    public bool clone;
+    private float innterTimmer, checkpassives = 5f, skillTimer, skillCooldown = 1f; 
 
     // Start is called before the first frame update
     void Awake(){
@@ -63,7 +66,40 @@ public class PlayerController : MonoBehaviour
         }
         if(!onInventorySlate){
             if(Input.GetButton("Fire1")){
-                tempLogic.HermitSkill();
+                if(!clone){
+                    if(resources.mana >= resources.mainSkill.Cost&&!mainSkillOnCooldown){
+                        skillMan.UsePrimarySkill(resources.mainSkill.Name);
+                        resources.ConsumeMana(resources.mainSkill.Cost);
+                        mainSkillOnCooldown = true;
+                    }
+                }
+                else{
+                    if(!mainSkillOnCooldown){
+                        tempLogic.HermitSkill();
+                        mainSkillOnCooldown = true;
+                }
+                    }
+                       
+            }
+        }
+        if(!clone){
+            if(innterTimmer >= checkpassives){
+                if(resources.passiveSkills[0].Name == "Lovers"||resources.passiveSkills[1].Name == "Lovers"){
+                    skillMan.UsePassiveSkill("Lovers");
+                }
+                innterTimmer = 0f;
+            }
+            else{
+                innterTimmer+= Time.deltaTime;
+            }
+        }
+        if(mainSkillOnCooldown){
+            if(skillTimer >= skillCooldown){
+                mainSkillOnCooldown = false;
+                skillTimer = 0;
+            }
+            else{
+                skillTimer+= Time.deltaTime;
             }
         }
         

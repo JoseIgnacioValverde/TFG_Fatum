@@ -10,6 +10,7 @@ public class FatumItem : MonoBehaviour
     public Canvas canvas;
     public InventoryManager manager;
     public ItemPresetActivator itemPreset;
+    public TextMeshProUGUI description;
     public bool PlayerIn;
     void Start()
     {
@@ -32,6 +33,7 @@ public class FatumItem : MonoBehaviour
 	{
 		if (other.tag == "Player") {
 			canvas.gameObject.SetActive(true);
+            description.text = "Press E";
             PlayerIn = true;
 		}
 	}

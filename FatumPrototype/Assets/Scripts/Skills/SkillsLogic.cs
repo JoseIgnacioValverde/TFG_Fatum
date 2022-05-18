@@ -42,7 +42,8 @@ public class SkillsLogic : MonoBehaviour
         }
     }
     public void UseLoversSkill(){
-        
+        UnityEngine.Debug.Log("Lovers");
+        playerTransform.gameObject.GetComponent<PlayerResources>().TakeDamage(-10);
     }
     public void Update(){
         if(timerOn){

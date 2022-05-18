@@ -8,6 +8,7 @@ public class PressurePlate : MonoBehaviour
     private float height;
     private float height2;
     private float maxSpeed = 5f, time = 0.5f;
+    public bool Autolowering;
 
     
     // Start is called before the first frame update
@@ -22,6 +23,31 @@ public class PressurePlate : MonoBehaviour
             if(!activated){
                 activated = true;
             }
+                
+        }
+
+    }
+    private void OnCollisionExit(Collision collision){
+        if(collision.collider.tag == "Player"){
+            if(Autolowering){
+                if(activated){
+                    activated = false;
+                }
+            }
+            
+                
+        }
+
+    }
+
+    private void OnTriggerExit(Collider other){
+        if(other.tag == "Player"){
+            if(Autolowering){
+                if(activated){
+                    activated = false;
+                }
+            }
+            
                 
         }
 

@@ -31,6 +31,7 @@ public class InventoryManager : MonoBehaviour
         delayPassed = true;
         GetAllInventorySlots();
         SetAllImages();
+        UpdatePlayerSkills();
         //
     }
     void Start(){
@@ -45,6 +46,8 @@ public class InventoryManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        UpdateImagesLockedUnlocked();
+        UpdatePlayerSkills();
         if(Input.GetButton("OpenInventory")){
             UnityEngine.Debug.Log("Check1");
             if(controller.onInventorySlate){
@@ -333,6 +336,54 @@ public class InventoryManager : MonoBehaviour
             InventorySlot updatedSlot = FindItemSlot(itemName);
             updatedSlot.unlocked = true;
             controller.dataManager.SaveGameData();
+        }
+        
+    }
+    private void UpdateImagesLockedUnlocked(){
+        for(int i = 0; i< allNames.Count; i++){
+            InventorySlot updatedSlot = FindItemSlot(allNames[i]);
+            if(updatedSlot.unlocked){
+                Skill auxiliar = SkillDB.GetSkillByName(allNames[i]);
+                updatedSlot.transform.GetComponent<Image>().sprite = auxiliar.skillSprite;
+            }
+            else{
+                Skill auxiliar = SkillDB.GetSkillByName("NoSkill");
+                updatedSlot.transform.GetComponent<Image>().sprite = auxiliar.skillSprite;
+            }
+        }
+        SetMainSkillsImages();
+    }
+    private void SetMainSkillsImages(){
+        InventorySlot target = FindItemSlot("Hermit");
+        if(target.unlocked){
+            Skill auxiliar = SkillDB.GetSkillByName("Hermit");
+            
+            mainSkill1.transform.GetComponent<Image>().sprite = auxiliar.skillSprite;
+        }
+        else{
+            Skill auxiliar = SkillDB.GetSkillByName("NoSkill");
+            mainSkill1.transform.GetComponent<Image>().sprite = auxiliar.skillSprite;
+        }
+    }
+    public void UpdatePlayerSkills(){
+         InventorySlot target = FindItemSlot("Hermit");
+        if(target.unlocked){
+            controller.resources.mainSkill = SkillDB.GetSkillByName("Hermit");
+        }
+        else{
+            controller.resources.mainSkill = SkillDB.GetSkillByName("NoSkill");
+        }
+        if(pasiveSkill1.skillName == "None"){
+            controller.resources.passiveSkills[0] = SkillDB.GetSkillByName("NoSkill");
+        }
+        else{
+            controller.resources.passiveSkills[0] = SkillDB.GetSkillByName(pasiveSkill1.skillName);
+        }
+        if(pasiveSkill2.skillName == "None"){
+            controller.resources.passiveSkills[1] = SkillDB.GetSkillByName("NoSkill");
+        }
+        else{
+            controller.resources.passiveSkills[1] = SkillDB.GetSkillByName(pasiveSkill2.skillName);
         }
         
     }

@@ -21,6 +21,9 @@ public class LevelDoor : MonoBehaviour
                 case 3:
                 MenuManager.LoadFirstLevel();
                 break;
+                case 4:
+                MenuManager.LoadFinalScreen();
+                break;
                 default:
                 break;
             }

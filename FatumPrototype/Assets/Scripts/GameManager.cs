@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class GameManager : MonoBehaviour
     public InventorySlate actualSlate;
     public string currentMap, currentSavedMap;
     private float gravity = -9.8f;
-    private string checkpoint;
+    public string checkpoint;
     void Start()
     {
     
@@ -42,6 +43,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(currentMap != "Main Menu"){
+            if(_resources.health <= 0){
+            ResurrectPlayer();
+            }
+        }
         
     }
     public void SaveGameData(){
@@ -72,16 +78,35 @@ public class GameManager : MonoBehaviour
     }
     public void LoadPlayerOnCheckpoint(){
         for(int i = 0; i<slates.Count; i++){
-            UnityEngine.Debug.Log("Checkpoint:"+checkpoint.ToString());
-            UnityEngine.Debug.Log("Checkpoint2:"+slates[i].id.ToString());
+            //UnityEngine.Debug.Log("Checkpoints same"+slates[i].id.ToString());
+            //UnityEngine.Debug.Log("Checkpoints same"+checkpoint);
+            //UnityEngine.Debug.Log("Checkpoints same"+slates[i].id.ToString() == checkpoint);
+            UnityEngine.Debug.Log("X "+slates[i].coordX+" Y "+slates[i].coordY+1f+" Z "+slates[i].coordZ);
             if(slates[i].id.ToString() == checkpoint){
-
+                //UnityEngine.Debug.Log("Checkpoints same"+slates[i].id.ToString());
+                //UnityEngine.Debug.Log("Checkpoints same"+checkpoint);
                 Transform playerTransform = GameObject.Find("Player").GetComponent<Transform>();
-                Vector3 position = new Vector3(slates[i].coordX,slates[i].coordY,slates[i].coordZ);
+                Vector3 position = new Vector3(slates[i].coordX,slates[i].coordY+1f,slates[i].coordZ);
+                //UnityEngine.Debug.Log("X "+slates[i].coordX+" Y "+slates[i].coordY+1f+" Z "+slates[i].coordZ);
                 playerTransform.position = position;
+                playerTransform.rotation = slates[i].transform.GetComponent<Transform>().rotation;
+                Physics.SyncTransforms();
+                return;
             }
             else
                 UnityEngine.Debug.Log("No entro");
+        }
+    }
+    public void LoadPlayerOnActualCheckpoint(){
+        for(int i = 0; i<slates.Count; i++){
+
+            if(slates[i].id == actualSlate.id){
+
+                Transform playerTransform = GameObject.Find("Player").GetComponent<Transform>();
+                Vector3 position = new Vector3(actualSlate.transform.position.x, actualSlate.transform.position.y+1f, actualSlate.transform.position.z);
+                playerTransform.position =position;
+                Physics.SyncTransforms();
+            }
         }
     }
     public void LoadSpecificLevel(){
@@ -95,5 +120,11 @@ public class GameManager : MonoBehaviour
     }
     public void ReturnToMenu(){
         MenuManager.ReturnToMenu();
+    }
+    public void ResurrectPlayer(){
+        _resources.health = _resources.maxHealth;
+        _resources.mana = _resources.maxMana;
+        SaveGameData();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

@@ -17,7 +17,7 @@ RenderSettings:
   m_Fog: 1
   m_FogColor: {r: 0.6415094, g: 0.6384834, b: 0.6384834, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.03
+  m_FogDensity: 0.025
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -236,6 +236,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 612191416780574562, guid: 6390ca92ec49982459677c4af080758a, type: 3}
+      propertyPath: id
+      value: 2.1
+      objectReference: {fileID: 0}
     - target: {fileID: 612191416780574562, guid: 6390ca92ec49982459677c4af080758a, type: 3}
       propertyPath: manager
       value: 
@@ -1471,7 +1475,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 612191416780574562, guid: 6390ca92ec49982459677c4af080758a, type: 3}
       propertyPath: id
-      value: 1
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 612191416780574562, guid: 6390ca92ec49982459677c4af080758a, type: 3}
       propertyPath: manager
@@ -1553,6 +1557,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 207.2
       objectReference: {fileID: 0}
+    - target: {fileID: 7219455893585986797, guid: 10dca4fdb46cbc4499ba4fcf1773b531, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7219455893585986797, guid: 10dca4fdb46cbc4499ba4fcf1773b531, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7219455893744856235, guid: 10dca4fdb46cbc4499ba4fcf1773b531, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.99508965
@@ -1563,11 +1575,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7219455893744856235, guid: 10dca4fdb46cbc4499ba4fcf1773b531, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000008560947
+      value: -0.000000008560945
       objectReference: {fileID: 0}
     - target: {fileID: 7219455893744856235, guid: 10dca4fdb46cbc4499ba4fcf1773b531, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -8.5152807e-10
+      value: 8.515279e-10
       objectReference: {fileID: 0}
     - target: {fileID: 7219455893833882884, guid: 10dca4fdb46cbc4499ba4fcf1773b531, type: 3}
       propertyPath: currentMap
@@ -1647,11 +1659,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7219455895479650139, guid: 10dca4fdb46cbc4499ba4fcf1773b531, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.00000001708818
+      value: 0.000000017088176
       objectReference: {fileID: 0}
     - target: {fileID: 7219455895479650139, guid: 10dca4fdb46cbc4499ba4fcf1773b531, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000002013392
+      value: -0.0000000020133915
       objectReference: {fileID: 0}
     - target: {fileID: 7219455895534198764, guid: 10dca4fdb46cbc4499ba4fcf1773b531, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1659,15 +1671,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7219455895534198764, guid: 10dca4fdb46cbc4499ba4fcf1773b531, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.13505942
+      value: 0.1350594
       objectReference: {fileID: 0}
     - target: {fileID: 7219455895534198764, guid: 10dca4fdb46cbc4499ba4fcf1773b531, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 8.719026e-16
+      value: -0.00000001476463
       objectReference: {fileID: 0}
     - target: {fileID: 7219455895534198764, guid: 10dca4fdb46cbc4499ba4fcf1773b531, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -1.7869098e-17
+      value: 0.0000000020125421
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10dca4fdb46cbc4499ba4fcf1773b531, type: 3}
@@ -2113,6 +2125,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TextCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1065786258865002627, guid: 4a0c7185bc06a0e4085011a8e71ac4cc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1065786258865002655, guid: 4a0c7185bc06a0e4085011a8e71ac4cc, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2197,6 +2213,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1065786259712902824, guid: 4a0c7185bc06a0e4085011a8e71ac4cc, type: 3}
+      propertyPath: m_margin.x
+      value: -204.29695
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065786259712902824, guid: 4a0c7185bc06a0e4085011a8e71ac4cc, type: 3}
+      propertyPath: m_margin.y
+      value: -126.055695
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065786259712902824, guid: 4a0c7185bc06a0e4085011a8e71ac4cc, type: 3}
+      propertyPath: m_margin.z
+      value: -220.23517
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a0c7185bc06a0e4085011a8e71ac4cc, type: 3}
 --- !u!223 &474865240 stripped
@@ -2204,6 +2232,17 @@ Canvas:
   m_CorrespondingSourceObject: {fileID: 1065786258865002652, guid: 4a0c7185bc06a0e4085011a8e71ac4cc, type: 3}
   m_PrefabInstance: {fileID: 474865239}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &474865241 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1065786259712902824, guid: 4a0c7185bc06a0e4085011a8e71ac4cc, type: 3}
+  m_PrefabInstance: {fileID: 474865239}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &475777956
 GameObject:
   m_ObjectHideFlags: 0
@@ -5463,6 +5502,69 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 7d22648c610059645bf21e118d5c39df, type: 3}
   m_PrefabInstance: {fileID: 1192757293}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1194527594
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1194527596}
+  - component: {fileID: 1194527595}
+  - component: {fileID: 1194527597}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!135 &1194527595
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194527594}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 6
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1194527596
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194527594}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 70.21, y: 0.21, z: -54.59}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 36
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1194527597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194527594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca2c6c978b8ba31449ac662b000b2dbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 474865240}
+  description: {fileID: 474865241}
+  PlayerIn: 0
+  textToWrite: 'You recovered one part of your essence. Great. Jump on the respawn
+    slate and open your inventory( I ) to equip it. '
+  timesShowingInfo: 3
 --- !u!1 &1202034187
 GameObject:
   m_ObjectHideFlags: 0
@@ -6239,6 +6341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activated: 0
+  Autolowering: 0
 --- !u!1001 &1287546916
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6501,7 +6604,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1393045764}
-  m_LocalRotation: {x: 0.117014244, y: -0.000000017100044, z: 0.00000000201196, w: 0.99313027}
+  m_LocalRotation: {x: 0.117014244, y: 0.000000017100042, z: -0.00000000201196, w: 0.99313027}
   m_LocalPosition: {x: 69.86, y: 5.83, z: -81.500015}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -7747,6 +7850,7 @@ MonoBehaviour:
   canvas: {fileID: 474865240}
   manager: {fileID: 659337417}
   itemPreset: {fileID: 1229090744}
+  description: {fileID: 474865241}
   PlayerIn: 0
 --- !u!1 &1874841927 stripped
 GameObject:

@@ -27,4 +27,7 @@ public class MenuManager : MonoBehaviour
     public static void ReturnToMenu(){
         SceneManager.LoadScene("Main Menu");
     }
+    public static void LoadFinalScreen(){
+        SceneManager.LoadScene("Main Menu");
+    }
 }
