@@ -20,9 +20,10 @@ public class SkillsLogic : MonoBehaviour
             ghostActive = true;
             playerTransform.gameObject.GetComponent<PlayerController>().enabled=false;
             playerTransform.gameObject.GetComponent<Rigidbody>().isKinematic = true;
-            Transform spawnZone = playerTransform.GetChild(2);
+            Transform spawnZone = playerTransform.GetChild(20);
             ghost = Instantiate(ghostPrefab, spawnZone.position, playerTransform.rotation);
-            effectShpere = Instantiate(ghostField, playerTransform.position, playerTransform.rotation);
+            Vector3 playerTransformCorrector = new Vector3(playerTransform.position.x, playerTransform.position.y+1.5f, playerTransform.position.z);
+            effectShpere = Instantiate(ghostField, playerTransformCorrector, playerTransform.rotation);
             _camera.LookAt = ghost.transform;
             _camera.Follow =ghost.transform;
             timerOn = true;

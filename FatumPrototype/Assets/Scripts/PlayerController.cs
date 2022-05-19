@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Rigidbody rb;
-
+    public Animator playerAnimator;
     public float speed = 2f;
     public float jumpForce;
     public PlayerResources resources;
@@ -17,13 +17,14 @@ public class PlayerController : MonoBehaviour
     public LayerMask GroundMask;
     public Transform playerTransform;
     public bool canJump;
-    public bool canMove =true, saved = false, mainSkillOnCooldown =false;
+    public bool canMove =true, saved = false, mainSkillOnCooldown =false, dancing;
     public bool onInventorySlate;
     public SkillsLogic tempLogic;
     public SkillManager skillMan;
     public GameManager dataManager;
     public bool clone;
-    private float innterTimmer, checkpassives = 5f, skillTimer, skillCooldown = 1f; 
+    private float innterTimmer, checkpassives = 5f, skillTimer, skillCooldown = 1f, danceTimer, danceTime = 1f; 
+    private Vector3 velocity = Vector3.zero;
 
     // Start is called before the first frame update
     void Awake(){
@@ -46,23 +47,52 @@ public class PlayerController : MonoBehaviour
             Vector3 right = Camera.main.transform.right;
             right.y = 0;
             right.Normalize();
+            if(vertical!= 0 || horizontal != 0){
+                //playerAnimator.SetFloat("Speed",0.2f);
+            }
+            else{
+                //playerAnimator.SetFloat("Speed",0);
+            }
         if(canMove){
+            
             Vector3 direction = forward * vertical + right * horizontal;
-
-            rb.velocity = new Vector3(direction.x * speed, rb.velocity.y, direction.z *speed);
-
+            
+            velocity = new Vector3(direction.x * speed, rb.velocity.y, direction.z *speed);
+            rb.velocity = velocity;
+            UnityEngine.Debug.Log("vel: "+velocity);
+            if(velocity.x != Vector3.zero.x ||velocity.z != Vector3.zero.z){
+                playerAnimator.SetBool("Running",true);
+                playerAnimator.SetTrigger("StopDance");
+                dancing = false;
+            }
+            else{
+               playerAnimator.SetBool("Running",false); 
+            }
             //Rotation
             if(direction != Vector3.zero){
                 playerTransform.rotation = Quaternion.LookRotation(direction);
             }
+            
         }
+        else{
+            playerAnimator.SetFloat("Speed",0);
+        }
+        
         
 
     }
     public void Update(){
-        canJump = Physics.CheckSphere(GroundCheck.position, checkDistance, GroundMask);
+        canJump = false;
+        if(!dancing){
+            canJump = Physics.CheckSphere(GroundCheck.position, checkDistance, GroundMask);
+        playerAnimator.SetBool("Jumping",!canJump); 
+        }
         if(canJump && canMove && Input.GetButton("Jump")){
             rb.velocity = Vector3.up * jumpForce;
+            playerAnimator.SetTrigger("Jump");
+            
+
+            
         }
         if(!onInventorySlate){
             if(Input.GetButton("Fire1")){
@@ -71,6 +101,7 @@ public class PlayerController : MonoBehaviour
                         skillMan.UsePrimarySkill(resources.mainSkill.Name);
                         resources.ConsumeMana(resources.mainSkill.Cost);
                         mainSkillOnCooldown = true;
+                        playerAnimator.SetBool("Running",false); 
                     }
                 }
                 else{
@@ -100,6 +131,22 @@ public class PlayerController : MonoBehaviour
             }
             else{
                 skillTimer+= Time.deltaTime;
+            }
+        }
+        if(Input.GetButton("Dance")&&canJump){
+            playerAnimator.SetTrigger("Dance");
+            dancing = true;
+            canJump = false;
+            canMove = false;
+        }
+        if(dancing){
+            if(danceTimer >= danceTime){
+                danceTimer = 0;
+                canMove = true;
+                canJump = true;
+            }
+            else{
+                danceTimer +=Time.deltaTime;
             }
         }
         

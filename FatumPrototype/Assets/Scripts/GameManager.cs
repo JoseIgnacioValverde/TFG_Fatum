@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     {
         if(currentMap != "Main Menu"){
             if(_resources.health <= 0){
-            ResurrectPlayer();
+            StartCoroutine(ResurrectPlayer(2.7f));
             }
         }
         
@@ -121,10 +121,17 @@ public class GameManager : MonoBehaviour
     public void ReturnToMenu(){
         MenuManager.ReturnToMenu();
     }
-    public void ResurrectPlayer(){
+    
+    public IEnumerator ResurrectPlayer(float length)
+	{  
+        PlayerController playerCont = GameObject.Find("Player").GetComponent<PlayerController>();
+        playerCont.playerAnimator.SetTrigger("Die");
+        playerCont.enabled = false;
+		yield return new WaitForSeconds(length); 
         _resources.health = _resources.maxHealth;
         _resources.mana = _resources.maxMana;
         SaveGameData();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
+
+	}
 }
