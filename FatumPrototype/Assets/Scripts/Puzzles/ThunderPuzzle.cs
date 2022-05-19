@@ -42,7 +42,7 @@ public class ThunderPuzzle : MonoBehaviour
             }
         }
     }
-    void Update()
+    void FixedUpdate()
     {
         if(!broken){
             CheckAllWalls();

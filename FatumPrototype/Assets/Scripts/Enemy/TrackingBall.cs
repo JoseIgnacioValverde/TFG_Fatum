@@ -32,6 +32,9 @@ public class TrackingBall : MonoBehaviour
         selfBody.AddForce(f);*/
         Vector3 a = transform.position;
         Vector3 b = targetTransform.position;
+        if(TargetingPlayer){
+            b = new Vector3(targetTransform.position.x, targetTransform.position.y+1f, targetTransform.position.z);
+        }
         transform.position = Vector3.MoveTowards(a, Vector3.Lerp(a,b,time), maxSpeed);
     }
     void OnCollisionEnter(Collision collision){

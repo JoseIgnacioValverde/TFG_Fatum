@@ -86,12 +86,15 @@ public class GameManager : MonoBehaviour
                 //UnityEngine.Debug.Log("Checkpoints same"+slates[i].id.ToString());
                 //UnityEngine.Debug.Log("Checkpoints same"+checkpoint);
                 Transform playerTransform = GameObject.Find("Player").GetComponent<Transform>();
-                Vector3 position = new Vector3(slates[i].coordX,slates[i].coordY+1f,slates[i].coordZ);
-                //UnityEngine.Debug.Log("X "+slates[i].coordX+" Y "+slates[i].coordY+1f+" Z "+slates[i].coordZ);
-                playerTransform.position = position;
-                playerTransform.rotation = slates[i].transform.GetComponent<Transform>().rotation;
-                Physics.SyncTransforms();
+                Vector3 position = new Vector3(slates[i].coordX,slates[i].coordY+0.3f,slates[i].coordZ);
+                if(position != Vector3.zero){
+                    playerTransform.position = position;
+                    playerTransform.rotation = slates[i].transform.GetComponent<Transform>().rotation;
+                    Physics.SyncTransforms();
                 return;
+                }
+                //UnityEngine.Debug.Log("X "+slates[i].coordX+" Y "+slates[i].coordY+1f+" Z "+slates[i].coordZ);
+                
             }
             else
                 UnityEngine.Debug.Log("No entro");

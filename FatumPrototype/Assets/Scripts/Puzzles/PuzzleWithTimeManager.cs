@@ -39,7 +39,7 @@ public class PuzzleWithTimeManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         switch(puzzleType){
             case 0:

@@ -43,7 +43,7 @@ public class PuzzleSlateOrder : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(!allPressurePlatesPressed){
                 CheckAllPlates();
