@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2066003737772755651}
   - component: {fileID: 2066003737772755708}
   - component: {fileID: 2066003737772755709}
-  - component: {fileID: 2066003737772755710}
   - component: {fileID: 2066003737772755649}
+  - component: {fileID: 3172435536891690544}
   m_Layer: 0
   m_Name: BossBall
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2066003737772755711}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 74.53, y: 9.69, z: 6.15}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e6d004a18ba5c9e4a84b574799c7720e, type: 2}
+  - {fileID: 2100000, guid: d9eca21f743ea024e8c12cb92a0f1918, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -97,22 +97,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &2066003737772755710
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2066003737772755711}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 2
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &2066003737772755649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,6 +111,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 0.3
   time: 100
-  selfBody: {fileID: 2066003737772755710}
   player: {fileID: 0}
   boss: {fileID: 0}
+--- !u!54 &3172435536891690544
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2066003737772755711}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

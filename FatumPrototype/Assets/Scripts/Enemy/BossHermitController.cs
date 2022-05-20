@@ -7,21 +7,27 @@ public class BossHermitController : MonoBehaviour
     public List<Transform> TeleportZones = new List<Transform>();
     public Transform playerTransform, groundTransform, projectileCreator;
     private Transform Attack;
+    public GameObject bossArmor1, bossArmor2;
+    public Animator bossAnimator;
     public int hits = 3;
-    public int maxShots = 1;
+    public int maxShots = 1, attacksWithoutRock = 0;
     private int remainingShots;
-    private float AttackToExecute = -1f, TimeBetweenAttacks = 5f, TimeBetweenTeleports = 15f, TimerTeleport = 0, TimerAttack =0, TeleportingTime = 0.5f, TimerOnAttack = 0, TimeAttacking = 1f, distanceWithPlayer;
-    private bool Teleporting, Attacking, AttackSecuence, TeleportOnCooldown, AttacksOnCooldown, isDead;
+    private float TimeBetweenAttacks = 5f, TimeBetweenTeleports = 15f, TimerTeleport = 0, TimerAttack =0, TimerOnAttack = 0, TimeAttacking = 1f, distanceWithPlayer, randomProb, animationShots, TimerDeath, TimerToDie = 2.7f;
+    private bool Teleporting, Attacking, AttackSecuence, TeleportOnCooldown, AttacksOnCooldown, isDead, lightning, changeAttack;
     private int TeleportIndex = -1;
 
     // Start is called before the first frame update
     void Start()
     {
+        bossAnimator.SetBool("IsDead",false);
         TeleportOnCooldown = true;
         AttacksOnCooldown = true;
         Teleporting = false;
         Attacking = false;
         isDead = false;
+        changeAttack = true;
+        UpdatePhase();
+        animationShots = maxShots;
     }
 
     // Update is called once per frame
@@ -52,26 +58,37 @@ public class BossHermitController : MonoBehaviour
                         TimerAttack = 0f;
                         AttacksOnCooldown = false;
                         remainingShots = maxShots;
+                        animationShots = maxShots;
                         Attacking = true;
                     }
                 }
                 if(Attacking){
-                    TimerOnAttack += Time.deltaTime;
-                    if(TimerOnAttack >= TimeAttacking){
-                        float rng = Random.Range(0f,1f);
-                        if(rng <=0.1){
-                            AttackBall();
+                    float rng = Random.Range(0f,1f);
+                    if(changeAttack){
+                        if(rng <=randomProb){
+                            lightning = false;
                         }
                         else{
-                            AttackLightning();
+                            lightning = true;
                         }
+                        changeAttack = false;
+                    }
                     
+                    TimerOnAttack += Time.deltaTime;
+                    if(TimerOnAttack >= TimeAttacking){
                         TimerOnAttack = 0;
+                        AttackCast();
+                        
                     }
-                    if(remainingShots < 1){
-                        Attacking = false;
-                        AttacksOnCooldown = true;
+                    else{
+                        if(remainingShots < 1){
+                            Attacking = false;
+                            AttacksOnCooldown = true;
+                            changeAttack = true;
+                            
+                        }
                     }
+                    
                 }
             }
             distanceWithPlayer = Vector3.Distance(playerTransform.position, transform.position);
@@ -81,10 +98,16 @@ public class BossHermitController : MonoBehaviour
                 TeleportOnCooldown = true;
             }
         }
+        else{
+            if(TimerDeath >= TimerToDie ){
+                transform.gameObject.SetActive(false);
+            }
+            else{
+                TimerDeath+= Time.deltaTime;
+            }
+        }
         CheckDeath();
         
-
-
     }
     public void Teleport(){
         int index;
@@ -97,29 +120,104 @@ public class BossHermitController : MonoBehaviour
         TeleportOnCooldown = true;
         Teleporting = false;
     }
+    private void AttackCast(){
+        if(lightning){
+            
+            AttackLightning();
+            attacksWithoutRock++;
+        }
+        else{
+            AttackBall();
+            attacksWithoutRock = 0;
+        }
+    }
     public void AttackLightning(){
-        
+        StartCoroutine(SetLapse(TimeAttacking));
         Vector3 realPosition = new Vector3(0,0,0);
         Attack = playerTransform;
         realPosition = new Vector3(Attack.position.x, groundTransform.position.y, Attack.position.z);
         Instantiate(Resources.Load("LightningCombo") as GameObject, realPosition, Quaternion.identity);
         //Attacking = false;
         remainingShots --;
+        //bossAnimator.SetTrigger("ReturnToIdle");
     }
     public void AttackBall(){
-        Instantiate(Resources.Load("BossBall") as GameObject, projectileCreator.position, Quaternion.identity);
-        remainingShots = 0;
+        StartCoroutine(RockLaunch(1.3f));
+        
     }
     public void TakeHit(){
         if(hits >0){
             hits--;
+            Teleport();
         }
+        UpdatePhase();
     }
     private void CheckDeath(){
         if(hits <= 0){
             isDead = true;
-            transform.gameObject.SetActive(false);
+            StopAllCoroutines();
+            bossAnimator.SetTrigger("Die");
+            bossAnimator.SetBool("IsDead", true);
         }
     }
-        
+    private void UpdatePhase(){
+        switch(hits){
+            case 3:
+                maxShots = 4;
+                if(attacksWithoutRock >= 32){
+                    randomProb = 1f;
+                }
+                else{
+                    randomProb = 0.2f;
+                }
+                
+                bossArmor1.SetActive(true);
+                bossArmor2.SetActive(true);
+            break;
+            case 2:
+                maxShots = 5;
+                if(attacksWithoutRock >= 30){
+                    randomProb = 1f;
+                }
+                else{
+                    randomProb = 0.3f;
+                }
+                bossArmor1.SetActive(false);
+            break;
+            case 1:
+                maxShots = 6;
+                if(attacksWithoutRock >= 18){
+                    randomProb = 1f;
+                }
+                else{
+                randomProb = 0.6f;
+                }
+                bossArmor2.SetActive(false);
+            break;
+            default:
+                maxShots = 0;
+            break;
+        }
+    }
+
+    public IEnumerator SetLapse(float lapse){
+        bossAnimator.SetTrigger("Lightning");
+        yield return new WaitForSeconds(lapse);
+        if(animationShots >1){
+            bossAnimator.SetBool("UsingChain",true);
+        }
+        else{
+            bossAnimator.SetBool("UsingChain",false);
+        }
+        bossAnimator.SetTrigger("ReturnToIdle");
+        animationShots --;
+    }
+    public IEnumerator RockLaunch(float lapse){
+        bossAnimator.SetTrigger("Rock");
+        remainingShots = 0;
+        yield return new WaitForSeconds(lapse/2);
+        Instantiate(Resources.Load("BossBall") as GameObject, projectileCreator.position, Quaternion.identity);
+        yield return new WaitForSeconds(lapse/2);
+        bossAnimator.SetTrigger("ReturnToIdle");
+    }
 }

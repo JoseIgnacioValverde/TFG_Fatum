@@ -5,7 +5,6 @@ using UnityEngine;
 public class TrackingBall : MonoBehaviour
 {
     public float maxSpeed = 5f, time = 10f;
-    public Rigidbody selfBody;
     public Transform player;
     public Transform boss;
     private Transform targetTransform;
@@ -26,16 +25,16 @@ public class TrackingBall : MonoBehaviour
         //selfBody.MovePosition(player.position);
     }
     void FixedUpdate(){
-        /*Vector3 f = player.position - transform.position;
-        f = f.normalized;
-        f = f*force;
-        selfBody.AddForce(f);*/
         Vector3 a = transform.position;
         Vector3 b = targetTransform.position;
         if(TargetingPlayer){
             b = new Vector3(targetTransform.position.x, targetTransform.position.y+1f, targetTransform.position.z);
         }
+        if(TargetingBoss){
+             b = new Vector3(targetTransform.position.x, targetTransform.position.y+6f, targetTransform.position.z);
+        }
         transform.position = Vector3.MoveTowards(a, Vector3.Lerp(a,b,time), maxSpeed);
+        transform.LookAt(b);
     }
     void OnCollisionEnter(Collision collision){
         if(collision.collider.transform.GetComponent<MirrorWall>()){
