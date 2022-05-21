@@ -28,6 +28,7 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene("Main Menu");
     }
     public static void LoadFinalScreen(){
-        SceneManager.LoadScene("Main Menu");
+        Cursor.lockState = CursorLockMode.None;
+        SceneManager.LoadScene("FinalScene");
     }
 }

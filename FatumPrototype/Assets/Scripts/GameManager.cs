@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             actualSlate = slates[0];
         }
+        else{
+            Cursor.lockState = CursorLockMode.None;
+        }
         
         bool fileExist = SaveDataManager.GameDataFileExists();
         if(fileExist){
@@ -123,6 +126,10 @@ public class GameManager : MonoBehaviour
     }
     public void ReturnToMenu(){
         MenuManager.ReturnToMenu();
+    }
+    public void NewGame(){
+        SaveDataManager.DeleteDataFile();
+        MenuManager.LoadFirstLevel();
     }
     
     public IEnumerator ResurrectPlayer(float length)

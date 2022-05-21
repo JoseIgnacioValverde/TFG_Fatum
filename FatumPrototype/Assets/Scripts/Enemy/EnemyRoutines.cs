@@ -69,10 +69,9 @@ public class EnemyRoutines : MonoBehaviour
     }
     private void Shoot(){
         if(shootReady){
-            animator.SetTrigger("Attack");
             isInAnimation = true;
             StartCoroutine(stopAnimation(1f));
-            StartCoroutine(WeildAttack(1f));
+            StartCoroutine(WeildAttack(0.5f));
             //Instantiate(Resources.Load("Projectile") as GameObject, projectileStart.position, Quaternion.identity);
             shootReady = false;
             
@@ -175,7 +174,9 @@ public class EnemyRoutines : MonoBehaviour
 	}
     public IEnumerator WeildAttack(float length)
 	{
+        animator.SetTrigger("Attack");
 		yield return new WaitForSeconds(length); 
+        animator.SetTrigger("ReturnToIdle");
         Instantiate(Resources.Load("Projectile") as GameObject, projectileStart.position, Quaternion.identity);
 		isInAnimation = false;
 	}

@@ -50,7 +50,9 @@ public class PlayerResources : MonoBehaviour
         Color healthColor = Color.Lerp(Color.red, Color.green,(health/maxHealth));
         Color manaColor = Color.Lerp(Color.white, Color.blue,(mana/maxMana));
         healthMaterial.color = healthColor;
+        healthMaterial.SetColor("_EmissionColor", healthColor);
         manaMaterial.color = manaColor;
+        manaMaterial.SetColor("_EmissionColor", manaColor);
     }
     public void TakeDamage(float quantity){
         UnityEngine.Debug.Log("Damage!" + quantity);

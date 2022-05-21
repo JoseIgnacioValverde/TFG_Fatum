@@ -8,13 +8,16 @@ public class ItemPresetActivator : MonoBehaviour
     public List<GameObject> itemsToGetActive;
     public GameObject platform;
     public bool activateItem;
-    public bool bossfight;
+    public bool bossfight, dontNeedPlatform;
     // Start is called before the first frame update
     void Start()
     {
         activateItem = false;
         itemToActivate.SetActive(false);
-        platform.SetActive(false);
+        if(!dontNeedPlatform){
+            platform.SetActive(false);
+        }
+            
     }
 
     // Update is called once per frame
@@ -35,6 +38,9 @@ public class ItemPresetActivator : MonoBehaviour
             }
         }
         activateItem = true;
-        platform.SetActive(true);
+        if(!dontNeedPlatform){
+            platform.SetActive(true);
+        }
+        
     }
 }

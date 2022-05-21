@@ -10,6 +10,7 @@ public class InstructionsItem : MonoBehaviour
     public bool PlayerIn;
     public string textToWrite;
     public int timesShowingInfo;
+    public AudioSource source;
    
     // Start is called before the first frame update
     void Update()
@@ -28,6 +29,7 @@ public class InstructionsItem : MonoBehaviour
 			    canvas.gameObject.SetActive(true);
                 description.text = textToWrite;
                 PlayerIn = true;
+                source.Play();
 		    }
         }
 		
@@ -40,6 +42,9 @@ public class InstructionsItem : MonoBehaviour
                 PlayerIn = false;
                 timesShowingInfo--;
 		    }
+        }
+        if(timesShowingInfo <=1){
+            this.gameObject.SetActive(false);
         }
 		
 	}
