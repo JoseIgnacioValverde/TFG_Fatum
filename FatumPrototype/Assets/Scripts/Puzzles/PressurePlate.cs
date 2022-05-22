@@ -9,6 +9,7 @@ public class PressurePlate : MonoBehaviour
     private float height2;
     private float maxSpeed = 5f, time = 0.5f;
     public bool Autolowering;
+    public AudioSource source;
 
     
     // Start is called before the first frame update
@@ -22,6 +23,7 @@ public class PressurePlate : MonoBehaviour
         if(collision.collider.tag == "Player"){
             if(!activated){
                 activated = true;
+                source.Play();
             }
                 
         }
@@ -32,6 +34,7 @@ public class PressurePlate : MonoBehaviour
             if(Autolowering){
                 if(activated){
                     activated = false;
+                    source.Play();
                 }
             }
             
@@ -45,6 +48,7 @@ public class PressurePlate : MonoBehaviour
             if(Autolowering){
                 if(activated){
                     activated = false;
+                    source.Play();
                 }
             }
             
@@ -57,6 +61,7 @@ public class PressurePlate : MonoBehaviour
 		if (other.tag == "Player") {
 			if(!activated){
                 activated = true;
+                source.Play();
             }
 		}
 	}
@@ -74,11 +79,13 @@ public class PressurePlate : MonoBehaviour
         if(activated){
             if(transform.position.y >= height2){
                 LowerPlate();
+                
             }
         }
         else{
             if(transform.position.y <= height){
                 ElevatePlate();
+                
             }
         }
     }

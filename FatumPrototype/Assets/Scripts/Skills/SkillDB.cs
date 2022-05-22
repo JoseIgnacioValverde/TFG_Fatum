@@ -65,7 +65,7 @@ public static class SkillDB
         "Lovers",
         "None", 0, 0, 0,
         Skill.SkillType.Pasive, "the lovers",
-        "The Lovers:This amulet restores health over time"
+        "What would you do for your loved one? What would you sacrifice?:This amulet restores health over time"
 
     );
     public static Skill Hierophant = new Skill(

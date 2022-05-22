@@ -10,7 +10,8 @@ public class PuzzleWithTimeManager : MonoBehaviour
     public int puzzleType; //0 se mueve en y, 1 se mueve en x, 2 se mueve en z
     public float timer, movingDistance1, movingDistance2, lowerDistance, modifier;
     public float speed =5f, timeToMove = 2f, timeToReturn = 5f;
-    private bool allPressurePlatesPressed, timerActive, disabled;
+    private bool allPressurePlatesPressed, timerActive, disabled, audioPlayed = false;
+    public AudioSource source;
     // Start is called before the first frame update
     void Start()
     {
@@ -174,6 +175,12 @@ public class PuzzleWithTimeManager : MonoBehaviour
         }
         allPressurePlatesPressed = allPressed;
         disabled = disableSwitch.activated;
+        if(allPressed||disabled){
+            if(!audioPlayed){
+                source.Play();
+                audioPlayed = true;
+            }
+        }
         
     }
     private void ResetAllPlates(){
@@ -245,6 +252,8 @@ public class PuzzleWithTimeManager : MonoBehaviour
                 timer = 0;
                 ResetAllPlates();
                 allPressurePlatesPressed = false;
+                source.Play();
+                audioPlayed = false;
             }
             else{
                 timer += Time.deltaTime;

@@ -21,6 +21,7 @@ public class EnemyRoutines : MonoBehaviour
      playerDetected = false, shootReady = false, posibleShot = false, loadingShot = false;
     private int index = 0;
     public LayerMask obstacle;
+    public AudioSource moveSource, detectSource, attackSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +33,8 @@ public class EnemyRoutines : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(agent.speed);
+                
+        //Debug.Log(agent.speed);
         Debug.DrawLine(transform.position, playerTransform.position, Color.blue);
         DetectPlayer();
         if(playerDetected){
@@ -49,12 +51,16 @@ public class EnemyRoutines : MonoBehaviour
     }
     private void DetectPlayer(){
         if(POV.playerDetected){
+
             //UnityEngine.Debug.Log(Physics.Raycast(transform.position, playerTransform.position, 100f, obstacle));
             RaycastHit hit = new RaycastHit();
             float distance = Vector3.Distance(transform.position, playerTransform.position);
             Physics.Raycast(transform.position, playerTransform.position, out hit, distance);
             //if(hit.collider.gameObject.tag == "Player"){
+                if(!playerDetected)
+                    detectSource.Play();
                 playerDetected = true;
+                
                 
             //}    
         }
@@ -65,7 +71,7 @@ public class EnemyRoutines : MonoBehaviour
                 patroling = true;
             }
                 
-        }  
+        }
     }
     private void Shoot(){
         if(shootReady){
@@ -85,6 +91,7 @@ public class EnemyRoutines : MonoBehaviour
     private void Patrol(){
         agent.isStopped = false;
         if(!miniStop){
+            moveSource.Play();
             if(agent.remainingDistance <= agent.stoppingDistance){
                 agent.isStopped = true;
                 agent.speed = 0;
@@ -108,6 +115,7 @@ public class EnemyRoutines : MonoBehaviour
         agent.SetDestination(playerTransform.position);
         float distance = Vector3.Distance(transform.position, playerTransform.position);
         if(distance < shotingDistance){
+            moveSource.Play();
             agent.SetDestination(BackWards.position);
             agent.speed = 6.5f;
             isInAnimation = true;
@@ -121,6 +129,7 @@ public class EnemyRoutines : MonoBehaviour
             selfBody.isKinematic = true;
         }
         else{
+            moveSource.Play();
             agent.speed = 4.5f;
             agent.isStopped = false;
             selfBody.isKinematic = false;
@@ -175,6 +184,7 @@ public class EnemyRoutines : MonoBehaviour
     public IEnumerator WeildAttack(float length)
 	{
         animator.SetTrigger("Attack");
+        attackSource.Play();
 		yield return new WaitForSeconds(length); 
         animator.SetTrigger("ReturnToIdle");
         Instantiate(Resources.Load("Projectile") as GameObject, projectileStart.position, Quaternion.identity);

@@ -13,8 +13,10 @@ public class ThunderPuzzle : MonoBehaviour
     public List<float> lowerdistances;
     public List<float> modifiers;
     public List<int> movingType;
+    public AudioSource source;
     public float speed =0.02f, timeToMove = 20f;
-    private bool allPressurePlatesPressed, broken;
+    private bool allPressurePlatesPressed, broken, audioPlayed = false;
+
 
     void Start()
     {
@@ -131,12 +133,18 @@ public class ThunderPuzzle : MonoBehaviour
             }
         }
         allPressurePlatesPressed = true;  
+
+            if(!audioPlayed){
+                source.Play();
+                audioPlayed = true;
+            }
     }
     private void CheckAllWalls(){
         
         for(int i = 0; i< walls.Count;i++){
             if(walls[i].hitRecieved == true){
                 broken = true;
+                source.Play();
                 return;
             }
         }

@@ -13,7 +13,9 @@ public class EnemyBaseProjectile : MonoBehaviour
     private float BulletMaxLife = 15f;
     private float timer = 0;
     private LayerMask groundMask;
-
+    public AudioSource source;
+    public AudioClip explosion;
+    public SphereCollider SCollider;
     void Start(){
         selfBody = transform.GetComponent<Rigidbody>();
         startPoint = transform;
@@ -44,10 +46,11 @@ public class EnemyBaseProjectile : MonoBehaviour
         UnityEngine.Debug.Log("¡FIRE!");
         selfBody.velocity = GameManager.CalculateVelocityForParabola(transform,10f);
     }
-    void Explode(){
+    public void Explode(){
         Collider[] colliders = Physics.OverlapSphere(transform.position, 2.5f);
         for(int i = 0; i<colliders.Length; i++){
             if(colliders[i].GetComponent<PlayerResources>()){
+                SCollider.enabled = false;
                 PlayerResources playerCont = colliders[i].GetComponent<PlayerResources>();
                 UnityEngine.Debug.Log("KABOOM!");
                 playerCont.TakeDamage(15f);
@@ -60,15 +63,21 @@ public class EnemyBaseProjectile : MonoBehaviour
         UnityEngine.Debug.Log("COLLISION!");
         PlayerResources playerCont = GameObject.Find("Player").GetComponent<PlayerResources>();
         if(collider.gameObject.tag == "Player"){
+            SCollider.enabled = false;
             playerCont.TakeDamage(15f);
             UnityEngine.Debug.Log("PLAYER!");
             Instantiate(Resources.Load("Fire") as GameObject, transform.position, Quaternion.identity);
-            Destroy(this.gameObject);
+            AudioSource.PlayClipAtPoint(explosion, transform.position, 0.4f);
+            //source.Play();
+            Explode();
         }
         else if(collider.gameObject.tag == "Ground"){
             //playerCont.TakeDamage(15f);
             //UnityEngine.Debug.Log("KABOOM!");
+            SCollider.enabled = false;
             Instantiate(Resources.Load("Fire") as GameObject, transform.position, Quaternion.identity);
+            AudioSource.PlayClipAtPoint(explosion, transform.position,0.4f);
+            //source.Play();
             Explode();
         }
     }

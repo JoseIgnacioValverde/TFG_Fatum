@@ -9,7 +9,8 @@ public class PuzzleManager : MonoBehaviour
     public int puzzleType;
     public float timer, movingDistance1, movingDistance2, lowerDistance, modifier;
     public float speed =5f, timeToMove = 2f;
-    private bool allPressurePlatesPressed;
+    private bool allPressurePlatesPressed, audioPlayed = false;
+    public AudioSource doorOpen;
     // Start is called before the first frame update
     void Start()
     {
@@ -114,6 +115,12 @@ public class PuzzleManager : MonoBehaviour
                 allPressed = false;
         }
         allPressurePlatesPressed = allPressed;
+        if(allPressed){
+            if(!audioPlayed){
+                doorOpen.Play();
+                audioPlayed = true;
+            }
+        }
         
     }
     private void LowerDoor(){

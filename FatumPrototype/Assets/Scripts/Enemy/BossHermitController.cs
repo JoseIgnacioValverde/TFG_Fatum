@@ -15,6 +15,7 @@ public class BossHermitController : MonoBehaviour
     private float TimeBetweenAttacks = 5f, TimeBetweenTeleports = 15f, TimerTeleport = 0, TimerAttack =0, TimerOnAttack = 0, TimeAttacking = 1f, distanceWithPlayer, randomProb, animationShots, TimerDeath, TimerToDie = 2.7f;
     private bool Teleporting, Attacking, AttackSecuence, TeleportOnCooldown, AttacksOnCooldown, isDead, lightning, changeAttack;
     private int TeleportIndex = -1;
+    public AudioSource damageRec, launch, castRock;
 
     // Start is called before the first frame update
     void Start()
@@ -148,6 +149,7 @@ public class BossHermitController : MonoBehaviour
     public void TakeHit(){
         if(hits >0){
             hits--;
+            damageRec.Play();
             Teleport();
         }
         UpdatePhase();
@@ -216,6 +218,7 @@ public class BossHermitController : MonoBehaviour
         bossAnimator.SetTrigger("Rock");
         remainingShots = 0;
         yield return new WaitForSeconds(lapse/2);
+        launch.Play();
         Instantiate(Resources.Load("BossBall") as GameObject, projectileCreator.position, Quaternion.identity);
         yield return new WaitForSeconds(lapse/2);
         bossAnimator.SetTrigger("ReturnToIdle");

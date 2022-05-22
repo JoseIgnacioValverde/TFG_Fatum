@@ -11,9 +11,10 @@ public class PuzzleSlateOrder : MonoBehaviour
     public List<float> lowerdistances;
     public List<float> modifiers;
     public List<int> movingType;
+    public List<AudioSource> sources;
     public int puzzleType;
     public float speed =5f, timeToMove = 2f;
-    private bool allPressurePlatesPressed;
+    private bool allPressurePlatesPressed, audioPlayed = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -94,6 +95,14 @@ public class PuzzleSlateOrder : MonoBehaviour
             }
         }
         allPressurePlatesPressed = true;
+        if(allPressurePlatesPressed){
+            if(!audioPlayed){
+                foreach(AudioSource audio in sources){
+                    audio.Play();
+                }
+                audioPlayed = false;
+            }       
+        }
         
         
     }
