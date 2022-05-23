@@ -30,10 +30,12 @@ public class ItemPresetActivator : MonoBehaviour
         foreach(GameObject objeto in itemsToGetActive){
             if(bossfight){
                 if(objeto.active == true){
+                    activateItem = false;
                 return;
             }
             }
             else if(objeto.active == false){
+                activateItem = false;
                 return;
             }
         }
