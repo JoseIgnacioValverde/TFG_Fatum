@@ -18,6 +18,7 @@ public class PlayerResources : MonoBehaviour
     private float timer =0, timeToRecoverMana = 1f;
     public Material healthMaterial;
     public Material manaMaterial;
+    public AudioSource source;
 
     // Start is called before the first frame update
     void Start()
@@ -58,6 +59,11 @@ public class PlayerResources : MonoBehaviour
         UnityEngine.Debug.Log("Damage!" + quantity);
         if(health > 0 && health <= maxHealth){
             health -= quantity;
+            if(quantity > 0){
+                source.pitch = Random.Range(0.8f, 1.1f);
+                source.Play();
+            }
+            
         }
     }
     public void ConsumeMana(float quantity){

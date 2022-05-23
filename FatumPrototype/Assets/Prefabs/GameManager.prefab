@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2269297230012528836}
   - component: {fileID: 2269297230012528837}
   - component: {fileID: 2269297230012528834}
+  - component: {fileID: 919287796995656590}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -109,7 +110,11 @@ MonoBehaviour:
   _manager: {fileID: 2269297230012528838}
   _resources: {fileID: 0}
   _dataManager: {fileID: 2269297230012528837}
+  slates: []
+  actualSlate: {fileID: 0}
   currentMap: TestingScene
+  currentSavedMap: 
+  checkpoint: 
 --- !u!114 &2269297230012528837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,3 +144,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d745fac81352b384e8d01c4a2bdce4db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &919287796995656590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2269297230012528841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d517a26a1cb8785439de27bb9e8b6f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicObject: {fileID: 0}
+  storer: {fileID: 0}

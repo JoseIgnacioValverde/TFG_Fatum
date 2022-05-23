@@ -17,13 +17,14 @@ public class PlayerController : MonoBehaviour
     public LayerMask GroundMask;
     public Transform playerTransform;
     public bool canJump;
-    public bool canMove =true, saved = false, mainSkillOnCooldown =false, dancing;
+    public bool canMove =true, saved = false, mainSkillOnCooldown =false, dancing, walking = false;
     public bool onInventorySlate;
     public SkillsLogic tempLogic;
     public SkillManager skillMan;
     public GameManager dataManager;
     public bool clone;
     private float innterTimmer, checkpassives = 5f, skillTimer, skillCooldown = 1f, danceTimer, danceTime = 1f; 
+    public AudioSource walk, death, skill;
     private Vector3 velocity = Vector3.zero;
 
     // Start is called before the first frame update
@@ -64,9 +65,11 @@ public class PlayerController : MonoBehaviour
                 playerAnimator.SetBool("Running",true);
                 playerAnimator.SetTrigger("StopDance");
                 dancing = false;
+                walking = true;
             }
             else{
                playerAnimator.SetBool("Running",false); 
+               walking = false;
             }
             //Rotation
             if(direction != Vector3.zero){
@@ -91,14 +94,14 @@ public class PlayerController : MonoBehaviour
             rb.velocity = Vector3.up * jumpForce;
             playerAnimator.SetTrigger("Jump");
             
-
-            
         }
         if(!onInventorySlate){
             if(Input.GetButton("Fire1")){
+                if(!skill.isPlaying)
                 if(!clone){
                     if(resources.mana >= resources.mainSkill.Cost&&!mainSkillOnCooldown){
                         skillMan.UsePrimarySkill(resources.mainSkill.Name);
+                        skill.Play();
                         resources.ConsumeMana(resources.mainSkill.Cost);
                         mainSkillOnCooldown = true;
                         playerAnimator.SetBool("Running",false); 
@@ -106,6 +109,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else{
                     if(!mainSkillOnCooldown){
+                        skill.Play();
                         tempLogic.HermitSkill();
                         mainSkillOnCooldown = true;
                 }
@@ -149,7 +153,10 @@ public class PlayerController : MonoBehaviour
                 danceTimer +=Time.deltaTime;
             }
         }
-        
+        if(canJump && velocity.magnitude > 2f && !walk.isPlaying){
+            walk.pitch = Random.Range(0.8f, 1.1f);
+            walk.Play();
+        }
 
     }
     private void OnDrawGizmosSelected(){

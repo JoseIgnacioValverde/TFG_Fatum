@@ -9,6 +9,7 @@ public class TrackingBall : MonoBehaviour
     public Transform boss;
     private Transform targetTransform;
     private bool TargetingPlayer, TargetingBoss;
+    public AudioClip rock;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,27 +39,33 @@ public class TrackingBall : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision){
         if(collision.collider.transform.GetComponent<MirrorWall>()){
+            AudioSource.PlayClipAtPoint(rock, transform.position, 0.3f);
             targetTransform = boss;
             TargetingPlayer = false;
             TargetingBoss = true;
         }
         if(collision.collider.transform.GetComponent<PlayerResources>()){
             if(TargetingPlayer){
-                collision.collider.transform.GetComponent<PlayerResources>().TakeDamage(10f);
+                AudioSource.PlayClipAtPoint(rock, transform.position, 0.3f);
+                collision.collider.transform.GetComponent<PlayerResources>().TakeDamage(20f);
                 Destroy(this.gameObject);
             }
             
         }
         if(collision.collider.transform.GetComponent<BossHermitController>()){
             if(TargetingBoss){
+                AudioSource.PlayClipAtPoint(rock, transform.position, 0.3f);
                 collision.collider.transform.GetComponent<BossHermitController>().TakeHit();
                 Destroy(this.gameObject);
             }
             
         }
         else{
-            if(TargetingPlayer)
+            if(TargetingPlayer){
+                AudioSource.PlayClipAtPoint(rock, transform.position, 0.3f);
                 Destroy(this.gameObject);
+            }
+                
         }
     }
 }

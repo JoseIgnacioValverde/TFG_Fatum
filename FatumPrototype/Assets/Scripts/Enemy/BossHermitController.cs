@@ -15,7 +15,7 @@ public class BossHermitController : MonoBehaviour
     private float TimeBetweenAttacks = 5f, TimeBetweenTeleports = 15f, TimerTeleport = 0, TimerAttack =0, TimerOnAttack = 0, TimeAttacking = 1f, distanceWithPlayer, randomProb, animationShots, TimerDeath, TimerToDie = 2.7f;
     private bool Teleporting, Attacking, AttackSecuence, TeleportOnCooldown, AttacksOnCooldown, isDead, lightning, changeAttack;
     private int TeleportIndex = -1;
-    public AudioSource damageRec, launch, castRock;
+    public AudioSource damageRec, launch, castThunder, teleport, die;
 
     // Start is called before the first frame update
     void Start()
@@ -116,6 +116,7 @@ public class BossHermitController : MonoBehaviour
             index = Random.Range(0, TeleportZones.Count);
         }while(index == TeleportIndex);
 
+        teleport.Play();
         transform.position = TeleportZones[index].position;
         TeleportIndex = index;
         TeleportOnCooldown = true;
@@ -137,6 +138,7 @@ public class BossHermitController : MonoBehaviour
         Vector3 realPosition = new Vector3(0,0,0);
         Attack = playerTransform;
         realPosition = new Vector3(Attack.position.x, groundTransform.position.y, Attack.position.z);
+        castThunder.Play();
         Instantiate(Resources.Load("LightningCombo") as GameObject, realPosition, Quaternion.identity);
         //Attacking = false;
         remainingShots --;
@@ -148,8 +150,12 @@ public class BossHermitController : MonoBehaviour
     }
     public void TakeHit(){
         if(hits >0){
+            if(hits > 1)
+                damageRec.Play();
+            else{
+                die.Play();
+            }
             hits--;
-            damageRec.Play();
             Teleport();
         }
         UpdatePhase();
@@ -158,6 +164,7 @@ public class BossHermitController : MonoBehaviour
         if(hits <= 0){
             isDead = true;
             StopAllCoroutines();
+            
             bossAnimator.SetTrigger("Die");
             bossAnimator.SetBool("IsDead", true);
         }
@@ -166,11 +173,11 @@ public class BossHermitController : MonoBehaviour
         switch(hits){
             case 3:
                 maxShots = 4;
-                if(attacksWithoutRock >= 32){
+                if(attacksWithoutRock >= 24){
                     randomProb = 1f;
                 }
                 else{
-                    randomProb = 0.2f;
+                    randomProb = 0.35f;
                 }
                 
                 bossArmor1.SetActive(true);
@@ -178,11 +185,11 @@ public class BossHermitController : MonoBehaviour
             break;
             case 2:
                 maxShots = 5;
-                if(attacksWithoutRock >= 30){
+                if(attacksWithoutRock >= 20){
                     randomProb = 1f;
                 }
                 else{
-                    randomProb = 0.3f;
+                    randomProb = 0.45f;
                 }
                 bossArmor1.SetActive(false);
             break;
@@ -192,7 +199,7 @@ public class BossHermitController : MonoBehaviour
                     randomProb = 1f;
                 }
                 else{
-                randomProb = 0.6f;
+                randomProb = 0.7f;
                 }
                 bossArmor2.SetActive(false);
             break;

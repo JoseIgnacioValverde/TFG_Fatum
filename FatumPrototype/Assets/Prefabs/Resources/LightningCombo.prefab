@@ -53,6 +53,7 @@ MonoBehaviour:
   TimeToDestroy: 15
   MinDamageInterval: 3
   MaxDamageInterval: 3.5
+  clip: {fileID: 8300000, guid: e30e0e6b80ba6c6449fb608ce9bd0092, type: 3}
 --- !u!1001 &3790890824153053716
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -136,6 +136,8 @@ public class GameManager : MonoBehaviour
 	{  
         PlayerController playerCont = GameObject.Find("Player").GetComponent<PlayerController>();
         playerCont.playerAnimator.SetTrigger("Die");
+        if(!playerCont.death.isPlaying)
+            playerCont.death.Play();
         playerCont.enabled = false;
 		yield return new WaitForSeconds(length); 
         _resources.health = _resources.maxHealth;
