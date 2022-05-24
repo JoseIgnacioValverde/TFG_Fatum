@@ -513,15 +513,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9177142772598972118, guid: 10dca4fdb46cbc4499ba4fcf1773b531, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.1350594
+      value: 0.13505942
       objectReference: {fileID: 0}
     - target: {fileID: 9177142772598972118, guid: 10dca4fdb46cbc4499ba4fcf1773b531, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00000001476463
+      value: -8.719026e-16
       objectReference: {fileID: 0}
     - target: {fileID: 9177142772598972118, guid: 10dca4fdb46cbc4499ba4fcf1773b531, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000020125421
+      value: 1.7869098e-17
       objectReference: {fileID: 0}
     - target: {fileID: 9177142773650696580, guid: 10dca4fdb46cbc4499ba4fcf1773b531, type: 3}
       propertyPath: m_LocalPosition.y
@@ -780,7 +780,7 @@ MonoBehaviour:
   canvas: {fileID: 661128212}
   description: {fileID: 661128213}
   PlayerIn: 0
-  textToWrite: Try to move around(WASD)
+  textToWrite: Try to move around(WASD) and look around(move the mouse)
   timesShowingInfo: 1
   source: {fileID: 105706476}
 --- !u!4 &105706475
@@ -2581,11 +2581,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1065786259712902824, guid: 4a0c7185bc06a0e4085011a8e71ac4cc, type: 3}
       propertyPath: m_text
-      value: ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+      value: ddddddddddddddddddddddddddddddd dddddddddddddddddddddddddddddddddddddddddd
       objectReference: {fileID: 0}
     - target: {fileID: 1065786259712902824, guid: 4a0c7185bc06a0e4085011a8e71ac4cc, type: 3}
       propertyPath: m_fontSize
-      value: 16
+      value: 31.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065786259712902824, guid: 4a0c7185bc06a0e4085011a8e71ac4cc, type: 3}
+      propertyPath: m_margin.w
+      value: -90.78209
       objectReference: {fileID: 0}
     - target: {fileID: 1065786259712902824, guid: 4a0c7185bc06a0e4085011a8e71ac4cc, type: 3}
       propertyPath: m_margin.x
@@ -2595,9 +2599,21 @@ PrefabInstance:
       propertyPath: m_margin.z
       value: -156.58136
       objectReference: {fileID: 0}
+    - target: {fileID: 1065786259712902824, guid: 4a0c7185bc06a0e4085011a8e71ac4cc, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -6597904499362935795, guid: c460ed8f22bb51b458103a64a2ec5383, type: 2}
+    - target: {fileID: 1065786259712902824, guid: 4a0c7185bc06a0e4085011a8e71ac4cc, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1065786259712902824, guid: 4a0c7185bc06a0e4085011a8e71ac4cc, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1065786259712902825, guid: 4a0c7185bc06a0e4085011a8e71ac4cc, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 122.7
+      value: 171.9
       objectReference: {fileID: 0}
     - target: {fileID: 1065786259712902830, guid: 4a0c7185bc06a0e4085011a8e71ac4cc, type: 3}
       propertyPath: m_IsActive
